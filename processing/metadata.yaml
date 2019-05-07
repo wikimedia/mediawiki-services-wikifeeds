@@ -1,6 +1,0 @@
-# strip markup that sometimes appears in section headings,
-# and can pollute the table of contents
-
-- rmElements:
-  - span[typeof=mw:FallbackId]
-  - span:empty

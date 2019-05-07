@@ -2,8 +2,10 @@
 
 'use strict';
 
-const _ = require('underscore');
+
 const assert = require('assert');
+const _ = require('lodash');
+
 
 function deepEqual(result, expected, message) {
 
@@ -17,6 +19,7 @@ function deepEqual(result, expected, message) {
 
 }
 
+
 /**
  * Asserts whether the return status was as expected
  */
@@ -26,6 +29,7 @@ function status(res, expected) {
         `Expected status to be ${expected}, but was ${res.status}`);
 
 }
+
 
 /**
  * Asserts whether content type was as expected
@@ -38,6 +42,7 @@ function contentType(res, expectedRegexString) {
 
 }
 
+
 function isDeepEqual(result, expected, message) {
 
     try {
@@ -48,6 +53,7 @@ function isDeepEqual(result, expected, message) {
     }
 
 }
+
 
 function notDeepEqual(result, expected, message) {
 
@@ -61,16 +67,6 @@ function notDeepEqual(result, expected, message) {
 
 }
 
-function property(object, property) {
-    const msg = `expected property="${property}"`;
-    assert.ok(object, msg);
-    assert.ok({}.hasOwnProperty.call(object, property), msg);
-}
-
-function notProperty(object, property) {
-    assert.ok(!object || !{}.hasOwnProperty.call(object, property),
-        `unexpected property="${property}"`);
-}
 
 function fails(promise, onRejected) {
 
@@ -96,89 +92,23 @@ function fails(promise, onRejected) {
  * @param {!number} expected
  * @param {!number} delta
  * @param {?string} message
-*/
+ */
 function closeTo(result, expected, delta, message) {
     assert.ok(_.isNumber(result) && Math.abs(result - expected) <= delta,
         message || `Result is ${result}; expected ${expected} ± ${delta}`);
 }
 
-function contains(result, sub, message) {
-    assert.ok(result.includes(sub),
-        message || `'${sub}' not in:\n${result}`);
-}
 
-function notContains(result, sub, message) {
-    assert.ok(!(result.includes(sub)),
-        message || `Unexpected substring '${sub}' found in:\n${result}`);
-}
 
-function selectorExistsNTimes(doc, selector, n, message) {
 
-    if (!message) {
-        message = `querySelectorAll('${selector}')`;
-    }
-    deepEqual(doc.querySelectorAll(selector).length, n, message);
-
-}
-
-function selectorExistsOnce(doc, selector, message) {
-
-    selectorExistsNTimes(doc, selector, 1, message);
-
-}
-
-function selectorDoesNotExist(doc, selector, message) {
-
-    selectorExistsNTimes(doc, selector, 0, message);
-
-}
-
-function selectorHasValue(doc, selector, expected, message) {
-
-    if (!message) {
-        message = `querySelector('${selector}').innerHTML value is not ${expected}`;
-    }
-    deepEqual(doc.querySelector(selector).innerHTML, expected, message);
-
-}
-
-function selectorContainsValue(doc, selector, expected, message) {
-
-    if (!message) {
-        message = `querySelector('${selector}').innerHTML value does not contain ${expected}`;
-    }
-    assert.ok(doc.querySelector(selector).innerHTML.includes(expected), message);
-
-}
-
-function attributeNotContainsValue(doc, selector, attribute, expected, message) {
-
-    if (!message) {
-        message = `querySelector('${selector}').getAttribute('${attribute}') value contains ${expected}`;
-    }
-    assert.ok(!doc.querySelector(selector).getAttribute(attribute).includes(expected), message);
-
-}
 
 module.exports.ok             = assert.ok;
-module.exports.equal          = assert.equal;
 module.exports.throws         = assert.throws;
-module.exports.doesNotThrow   = assert.doesNotThrow;
 module.exports.fails          = fails;
 module.exports.deepEqual      = deepEqual;
 module.exports.isDeepEqual    = isDeepEqual;
 module.exports.notDeepEqual   = notDeepEqual;
-module.exports.property       = property;
-module.exports.notProperty    = notProperty;
 module.exports.contentType    = contentType;
 module.exports.status         = status;
 module.exports.closeTo        = closeTo;
-module.exports.contains       = contains;
-module.exports.notContains    = notContains;
-module.exports.selectorExistsNTimes = selectorExistsNTimes;
-module.exports.selectorExistsOnce = selectorExistsOnce;
-module.exports.selectorDoesNotExist = selectorDoesNotExist;
-module.exports.selectorHasValue = selectorHasValue;
-module.exports.selectorContainsValue = selectorContainsValue;
-module.exports.attributeNotContainsValue = attributeNotContainsValue;
-module.exports.AssertionError = assert.AssertionError;
+

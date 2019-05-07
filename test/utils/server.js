@@ -1,5 +1,6 @@
 'use strict';
 
+
 const BBPromise = require('bluebird');
 const ServiceRunner = require('service-runner');
 const logStream = require('./logStream');
@@ -7,7 +8,7 @@ const fs = require('fs');
 const assert = require('./assert');
 const yaml = require('js-yaml');
 const extend = require('extend');
-const sepia = require('sepia');
+
 
 // set up the configuration
 let config = {
@@ -30,17 +31,10 @@ config.conf.logging = {
 // make a deep copy of it for later reference
 const origConfig = extend(true, {}, config);
 
-// Requests to our own service should always be live and not use the VCR facility.
-sepia.filter({
-    url: new RegExp(config.uri),
-    forceLive: true
-});
-
-module.exports.stop = () => {
-    return BBPromise.resolve();
-};
+module.exports.stop = () => { return BBPromise.resolve(); };
 let options = null;
 const runner = new ServiceRunner();
+
 
 function start(_options) {
 
@@ -76,3 +70,4 @@ function start(_options) {
 
 module.exports.config = config;
 module.exports.start  = start;
+

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const parse = require('csv-parse/lib/sync');
 const assert = require('../../utils/assert');
-const filter = require('../../../lib/feed/most-read-filter');
+const filter = require('../../../lib/most-read-filter');
 
 const combinedMostRead = require('./all-access-top-50').items[0].articles;
 const desktopMostRead = require('./desktop-top-100').items[0].articles;

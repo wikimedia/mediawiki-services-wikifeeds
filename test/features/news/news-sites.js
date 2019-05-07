@@ -5,7 +5,7 @@
 const assert = require('../../utils/assert');
 const domino = require('domino');
 const fs = require('fs');
-const NEWS_SITES = require('../../../etc/feed/news-sites');
+const NEWS_SITES = require('../../../etc/news-sites');
 
 describe('news headline selectors', function() {
     this.timeout(20000); // eslint-disable-line no-invalid-this
@@ -41,7 +41,7 @@ describe('news headline selectors', function() {
         const doc = readTestDoc(lang);
         const headlines = doc.querySelectorAll(NEWS_SITES[lang].headlineSelectorAll);
         const topic = headlines[2].querySelector(NEWS_SITES[lang].topicAnchorSelector);
-        assert.equal(topic.getAttribute('href'), './Poisoning_of_Sergei_and_Yulia_Skripal');
+        assert.deepEqual(topic.getAttribute('href'), './Poisoning_of_Sergei_and_Yulia_Skripal');
     });
 
     it('news headline topic should be the first link when no link is bolded', () => {
@@ -49,7 +49,7 @@ describe('news headline selectors', function() {
         const doc = readTestDoc(lang);
         const headlines = doc.querySelectorAll(NEWS_SITES[lang].headlineSelectorAll);
         const topic = headlines[1].querySelector(NEWS_SITES[lang].topicAnchorSelector);
-        assert.equal(topic.getAttribute('href'),
+        assert.deepEqual(topic.getAttribute('href'),
             './Campeonato_Mundial_de_Patinaje_Artístico_sobre_Hielo_de_2018');
     });
 });

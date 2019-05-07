@@ -2,6 +2,7 @@
 
 'use strict';
 
+
 const preq   = require('preq');
 const assert = require('../../utils/assert.js');
 const server = require('../../utils/server.js');
@@ -9,9 +10,9 @@ const URI    = require('swagger-router').URI;
 const yaml   = require('js-yaml');
 const fs     = require('fs');
 
-const dateUtil = require('../../../lib/dateUtil');
+const dateUtil = require('../../../lib/date-util');
 const pad = dateUtil.pad;
-const Ajv    = require('ajv');
+const Ajv = require('ajv');
 
 const baseUri = `${server.config.uri}en.wikipedia.org/v1/`;
 const d1 = new Date();
@@ -41,6 +42,7 @@ function staticSpecLoad() {
     return spec;
 
 }
+
 
 function validateExamples(pathStr, defParams, mSpec) {
 
@@ -77,6 +79,7 @@ function validateExamples(pathStr, defParams, mSpec) {
 
 }
 
+
 function constructTestCase(title, path, method, request, response) {
 
     return {
@@ -97,6 +100,7 @@ function constructTestCase(title, path, method, request, response) {
     };
 
 }
+
 
 function constructTests(paths, defParams) {
 
@@ -135,6 +139,7 @@ function constructTests(paths, defParams) {
     return ret;
 
 }
+
 
 function cmp(result, expected, errMsg) {
 
@@ -192,6 +197,7 @@ function cmp(result, expected, errMsg) {
 
 }
 
+
 function validateTestResponse(testCase, res) {
 
     const expRes = testCase.response;
@@ -210,9 +216,7 @@ function validateTestResponse(testCase, res) {
         return true;
     }
     res.body = res.body || '';
-    if (Buffer.isBuffer(res.body)) {
-        res.body = res.body.toString();
-    }
+    if (Buffer.isBuffer(res.body)) { res.body = res.body.toString(); }
     if (expRes.body.constructor !== res.body.constructor) {
         if (expRes.body.constructor === String) {
             res.body = JSON.stringify(res.body);
@@ -233,6 +237,7 @@ function validateTestResponse(testCase, res) {
     return true;
 
 }
+
 
 describe('Swagger spec', function() {
 
@@ -356,26 +361,6 @@ describe('Swagger spec', function() {
             return assertValidSchema(uri, '#/definitions/onthisdayResponse');
         });
 
-        it('summary response should conform to schema', () => {
-            const uri = `${baseUri}page/summary/Dubai/808803658`;
-            return assertValidSchema(uri, '#/definitions/summary');
-        });
-
-        it('metadata response should conform to schema', () => {
-            const uri = `${baseUri}page/metadata/Hummingbird`;
-            return assertValidSchema(uri, '#/definitions/metadata');
-        });
-
-        it('media response should conform to schema', () => {
-            const uri = `${baseUri}page/media/Hummingbird`;
-            return assertValidSchema(uri, '#/definitions/media_list');
-        });
-
-        it('references response should conform to schema', () => {
-            const uri = `${baseUri}page/references/List_of_highest-grossing_Indian_films`;
-            return assertValidSchema(uri, '#/definitions/references_response');
-        });
-
         // Bad requests return empty response for aggregated=true
 
         it('featured article response should conform to schema (invalid lang, agg=true)', () => {
@@ -435,3 +420,4 @@ describe('Swagger spec', function() {
     });
 
 });
+

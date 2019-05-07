@@ -4,7 +4,7 @@ const assert = require('../../utils/assert.js');
 const server = require('../../utils/server.js');
 const testUtil = require('../../utils/testUtil.js');
 const preq = require('preq');
-const languages = require('../../../lib/feed/featured.js').testing.supportedLangs;
+const languages = require('../../../lib/featured.js').testing.supportedLangs;
 
 // Note: to run large tests set the env variable LARGE_TESTS to any string
 describe('featured-large', function() {

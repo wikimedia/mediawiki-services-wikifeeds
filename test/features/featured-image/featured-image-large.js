@@ -4,7 +4,7 @@ const preq = require('preq');
 const assert = require('../../utils/assert.js');
 const server = require('../../utils/server.js');
 const testUtil = require('../../utils/testUtil.js');
-const dateUtil = require('../../../lib/dateUtil');
+const dateUtil = require('../../../lib/date-util');
 
 const languages = ['en'];
 

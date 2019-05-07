@@ -23,7 +23,7 @@ metrics:
   #port: 8125
 
 services:
-  - name: service-mobileapp-node
+  - name: wikifeeds
     # a relative path or the name of an npm package, if different from name
     module: ./app.js
     # optionally, a version constraint of the npm package
@@ -60,9 +60,7 @@ services:
       #   - user-agent
       #   - x-request-id
       # the user agent to use when issuing requests
-      mobile_html_rest_api_base_uri: "//localhost:6927/api/v1/"
-      mobile_html_csp: "default-src 'none'; media-src *; img-src * data:; script-src app://localhost:6927 http://localhost:6927 'self' 'unsafe-inline'; style-src app://localhost http://localhost app://*.wikipedia.org http://*.wikipedia.org 'self' 'unsafe-inline'; frame-ancestors 'self'"
-      user_agent: WMF Mobile Content Service dev
+      user_agent: WMF Wikifeeds Service dev
       # the template used for contacting the MW API
       mwapi_req:
         method: post
@@ -77,6 +75,5 @@ services:
         query: '{{ default(request.query, {}) }}'
         headers: '{{request.headers}}'
         body: '{{request.body}}'
-        timeout: 60000 # 60 * 1000
       # whether to print extra debug info
       debug: true

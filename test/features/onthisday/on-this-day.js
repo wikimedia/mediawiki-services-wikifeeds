@@ -46,7 +46,7 @@ describe('onthisday', function() {
         it(`${type}: unsupported language throws 501`, () => {
             return getJanuary30ResponseForEndpointName(type, 'nl')
             .catch((error) => {
-                assert.equal(error.status, 501);
+                assert.deepEqual(error.status, 501);
             });
         });
 

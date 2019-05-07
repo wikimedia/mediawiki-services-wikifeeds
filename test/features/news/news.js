@@ -3,7 +3,7 @@
 const preq = require('preq');
 const assert = require('../../utils/assert');
 const server = require('../../utils/server');
-const NEWS_TEMPLATES = require('../../../etc/feed/news-sites');
+const NEWS_TEMPLATES = require('../../../etc/news-sites');
 
 describe('news', function() {
 

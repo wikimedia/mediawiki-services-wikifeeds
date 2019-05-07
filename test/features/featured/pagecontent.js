@@ -68,7 +68,7 @@ describe('featured', function() {
                 throw new Error(`Expected an error, but got status: ${res.status}`);
             }, (err) => {
                 assert.status(err, 404);
-                assert.equal(err.body.type, 'not_found');
+                assert.deepEqual(err.body.type, 'not_found');
             });
     });
 });

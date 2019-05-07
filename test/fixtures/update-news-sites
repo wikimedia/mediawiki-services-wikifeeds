@@ -3,7 +3,7 @@
 'use strict';
 
 const fs = require('fs');
-const dateUtil = require('../../lib/dateUtil');
+const dateUtil = require('../../lib/date-util');
 const preq = require('preq');
 const NEWS_SITES = require('../../etc/feed/news-sites');
 

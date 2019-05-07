@@ -1,10 +1,10 @@
 'use strict';
 
-const onThisDayLangs = require('../../../lib/feed/on-this-day.languages.js');
+const onThisDayLangs = require('../../../lib/on-this-day.languages.js');
 
 const server = require('../../utils/server.js');
 const assert = require('../../utils/assert.js');
-const dateUtil = require('../../../lib/dateUtil.js');
+const dateUtil = require('../../../lib/date-util.js');
 const preq = require('preq');
 
 const languages = onThisDayLangs.languages;
