@@ -1,6 +1,6 @@
 [gerrit]
 host=gerrit.wikimedia.org
 port=29418
-project=mediawiki/services/mobileapps
-defaultbranch=master
+project=mediawiki/services/wikifeeds.git
+track=1
 defaultrebase=0
