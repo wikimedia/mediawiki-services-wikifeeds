@@ -34,7 +34,7 @@ services:
       # interface: localhost # uncomment to only listen on localhost
       # more per-service config settings
       # the location of the spec, defaults to spec.yaml if not specified
-      # spec: ./spec.yaml
+      # spec: ./spec.template.yaml
       # allow cross-domain requests to the API (default '*')
       cors: '*'
       # to disable use:
@@ -61,6 +61,8 @@ services:
       #   - x-request-id
       # the user agent to use when issuing requests
       user_agent: WMF Wikifeeds Service dev
+      # # Max JSON POST body size limit.
+      # max_body_size: 100kb
       # the template used for contacting the MW API
       mwapi_req:
         method: post

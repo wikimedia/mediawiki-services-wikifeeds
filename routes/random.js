@@ -13,11 +13,6 @@ const randomPage = require('../lib/random');
  */
 const router = util.router();
 
-/**
- * The main application object reported when this module is require()d
- */
-let app;
-
 function buildResponse(title) {
     return { items: [ { title } ] };
 }
@@ -32,7 +27,7 @@ function buildResponse(title) {
  * seems to consistently produce a really "good" result.
  */
 router.get('/random/title', (req, res) => {
-    return randomPage.promise(app, req)
+    return randomPage.promise(req)
     .then((result) => {
         res.status(200);
         util.setETag(res, result.meta.etag);
@@ -42,7 +37,6 @@ router.get('/random/title', (req, res) => {
 });
 
 module.exports = function (appObj) {
-    app = appObj;
     return {
         path: '/page',
         api_version: 1,

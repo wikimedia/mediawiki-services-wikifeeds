@@ -1,13 +1,15 @@
-/Dockerfile
+Dockerfile
 .idea/
 .vscode/
 
 coverage
+
+.nyc_output
+config.yaml
 node_modules
 npm-debug.log
+package-lock.json
 
 .eslintcache
-
 .DS_Store
 tmp/
-.nyc_output/

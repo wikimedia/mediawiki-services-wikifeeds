@@ -24,7 +24,7 @@ let app;
  * ETag is set to the pageid and the revision.
  */
 router.get('/image/featured/:yyyy/:mm/:dd', (req, res) => {
-    return si.getSiteInfo(app, req)
+    return si.getSiteInfo(req)
     .then((si) => featured.promise(app, req, si)
     .then((response) => {
         res.status(!response.payload ? 204 : 200);
