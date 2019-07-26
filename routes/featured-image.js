@@ -27,10 +27,13 @@ router.get('/image/featured/:yyyy/:mm/:dd', (req, res) => {
     return si.getSiteInfo(req)
     .then((si) => featured.promise(app, req, si)
     .then((response) => {
-        res.status(!response.payload ? 204 : 200);
-        util.setETag(res, response.meta.revision, response.meta.tid);
-        util.setContentType(res, util.CONTENT_TYPES.unpublished);
-        res.json(response.payload || null).end();
+        if (response.payload) {
+            util.setETag(res, response.meta && response.meta.tid);
+            util.setContentType(res, util.CONTENT_TYPES.unpublished);
+            res.status(200).json(response.payload);
+        } else {
+            res.status(204).end();
+        }
     }));
 });
 

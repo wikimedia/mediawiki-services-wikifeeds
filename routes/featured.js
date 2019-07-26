@@ -24,10 +24,13 @@ let app;
 router.get('/featured/:yyyy/:mm/:dd', (req, res) => {
     return featured.promise(app, req)
         .then((response) => {
-            res.status(!response.payload ? 204 : 200);
-            util.setETag(res, response.meta && response.meta.etag);
-            util.setContentType(res, util.CONTENT_TYPES.unpublished);
-            res.json(response.payload || null).end();
+            if (response.payload) {
+                util.setETag(res, response.meta && response.meta.etag);
+                util.setContentType(res, util.CONTENT_TYPES.unpublished);
+                res.status(200).json(response.payload);
+            } else {
+                res.status(204).end();
+            }
         });
 });
 
