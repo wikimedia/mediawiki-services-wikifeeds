@@ -1,16 +1,13 @@
 swagger: '2.0'
 
 info:
-  version: 0.3.0
-  title: WMF MobileApps service
-  description: |
-    (aka Mobile Content Service and Page Content Service).
-    A collection of REST API services supporting Wikimedia Foundation (WMF) Readers products.
-    https://www.mediawiki.org/wiki/Wikimedia_Apps/Team/RESTBase_services_for_apps
+  version: 1.0.0
+  title: wikifeeds
+  description: A node webservice supporting featured wiki content feeds
   termsOfService: https://wikimediafoundation.org/wiki/Terms_of_Use
   contact:
-    name: the Wikimedia Foundation Reading Infrastructure team.
-    url: https://www.mediawiki.org/wiki/Wikimedia_Reading_Infrastructure_team
+    name: Wikimedia Product Infrastructure Team
+    url: https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team
   license:
     name: Apache2
     url: http://www.apache.org/licenses/LICENSE-2.0
