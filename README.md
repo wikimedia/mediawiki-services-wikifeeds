@@ -32,38 +32,38 @@ To start the server hosting the REST API, simply run (inside the repo's director
 npm start
 ```
 
-This starts an HTTP server listening on `localhost:6927`.
+This starts an HTTP server listening on `localhost:8889`.
 
 ### Endpoints
-There are a few routes you may query (with a browser, or `curl` and friends). You can see more documentation at `localhost:6927/?doc`.
+There are a few routes you may query (with a browser, or `curl` and friends). You can see more documentation at `localhost:8889/?doc`.
 
-* `http://localhost:6927/en.wikipedia.org/v1/page/featured/2016/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/media/image/featured/2016/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/page/news`
-* `http://localhost:6927/en.wikipedia.org/v1/page/most-read/2016/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/page/random/title`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/onthisday/births/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/onthisday/deaths/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/onthisday/events/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/onthisday/selected/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/onthisday/holidays/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/onthisday/all/05/30`
-* `http://localhost:6927/en.wikipedia.org/v1/feed/announcements`
+* `http://localhost:8889/en.wikipedia.org/v1/page/featured/2016/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/media/image/featured/2016/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/page/news`
+* `http://localhost:8889/en.wikipedia.org/v1/page/most-read/2016/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/page/random/title`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/births/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/deaths/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/events/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/selected/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/holidays/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/all/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/feed/announcements`
 
 Note that day and month need to be 2 digits to be accepted. 0-pad them if necessary.
 
 #### Generic routes
 Feed endpoint availability by language:
-* `http://localhost:6927/wikimedia.org/v1/feed/availability`
+* `http://localhost:8889/wikimedia.org/v1/feed/availability`
 
 Swagger spec:
-* `http://localhost:6927/?spec`
+* `http://localhost:8889/?spec`
 
 Swagger UI:
-* `http://localhost:6927/?doc`
+* `http://localhost:8889/?doc`
 
 Info:
-* `http://localhost:6927/_info`
+* `http://localhost:8889/_info`
 
 ### Tests
 
