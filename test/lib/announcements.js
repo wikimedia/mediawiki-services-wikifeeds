@@ -11,13 +11,13 @@ const activeAnnouncementDomain = 'en.wikipedia.org';
 describe('lib:announcements', () => {
     it('should return no announcement for inactive wiki', () => {
         const res = mut.getAnnouncements(inactiveAnnouncementDomain);
-        assert.ok(res.announce.length === 1);
+        assert.ok(res.announce.length === 0);
     });
 
     it('should return one or more announcements for active wiki', () => {
         const res = mut.getAnnouncements(activeAnnouncementDomain);
         if (mut.testing.hasEnded(new Date())) {
-            assert.ok(res.announce.length === 1);
+            assert.ok(res.announce.length === 0);
         } else {
             assert.ok(res.announce.length === 18);
         }

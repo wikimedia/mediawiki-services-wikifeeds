@@ -262,7 +262,7 @@ describe('Swagger spec', function() {
         });
     });
 
-    it.skip('spec validation', () => {
+    it('spec validation', () => {
         if (spec['x-default-params']) {
             defParams = spec['x-default-params'];
         }
@@ -287,7 +287,7 @@ describe('Swagger spec', function() {
         });
     });
 
-    describe.skip('validate responses against schema', () => {
+    describe('validate responses against schema', () => {
         const ajv = new Ajv({});
 
         const assertValidSchema = (uri, schemaPath) => {
@@ -404,7 +404,7 @@ describe('Swagger spec', function() {
         });
     });
 
-    describe.skip('validate spec examples', () => {
+    describe('validate spec examples', () => {
 
         constructTests(spec.paths, defParams).forEach((testCase) => {
             it(testCase.title, () => {
