@@ -111,4 +111,5 @@ module.exports.notDeepEqual   = notDeepEqual;
 module.exports.contentType    = contentType;
 module.exports.status         = status;
 module.exports.closeTo        = closeTo;
+module.exports.AssertionError = assert.AssertionError;
 
