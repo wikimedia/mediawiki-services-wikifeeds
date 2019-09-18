@@ -31,6 +31,6 @@ if echo -e "${flist}" | grep -i package.json > /dev/null; then
 fi
 
 # now, restart the service
-systemctl restart mobileapps;
+systemctl restart wikifeeds;
 
 exit $?;
