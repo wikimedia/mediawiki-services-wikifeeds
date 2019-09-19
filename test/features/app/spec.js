@@ -346,11 +346,6 @@ describe('Swagger spec', function() {
             return assertValidSchema(uri, '#/definitions/news');
         });
 
-        it('random response should conform to schema', () => {
-            const uri = `${baseUri}page/random/title`;
-            return assertValidSchema(uri, '#/definitions/random');
-        });
-
         it('announcements should conform to schema', () => {
             const uri = `${baseUri}feed/announcements`;
             return assertValidSchema(uri, '#/definitions/announcements');
