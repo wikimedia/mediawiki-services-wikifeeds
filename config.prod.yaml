@@ -66,7 +66,7 @@ services:
       # the template used for contacting the MW API
       mwapi_req:
         method: post
-        uri: http://api.svc.eqiad.wmnet/w/api.php
+        uri: http://api-rw.discovery.wmnet/w/api.php
         headers:
           host: '{{request.params.domain}}'
           user-agent: '{{user-agent}}'
@@ -75,7 +75,17 @@ services:
       # the template used for contacting RESTBase
       restbase_req:
         method: '{{request.method}}'
-        uri: http://restbase.svc.eqiad.wmnet/{{domain}}/v1/{+path}
+        uri: http://restbase.discovery.wmnet/{{domain}}/v1/{+path}
         query: '{{ default(request.query, {}) }}'
         headers: '{{request.headers}}'
         body: '{{request.body}}'
+      # the template used for requesting a page from a MediaWiki appserver
+      mw_req:
+        method: get
+        uri: http://appservers-rw.discovery.wmnet/w/index.php
+        query:
+          title: '{{request.params.title}}'
+        headers:
+          host: '{{request.params.domain}}'
+          user-agent: '{{user-agent}}'
+          accept-language: '{{accept-language}}'

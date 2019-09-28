@@ -78,5 +78,14 @@ services:
         query: '{{ default(request.query, {}) }}'
         headers: '{{request.headers}}'
         body: '{{request.body}}'
+      # the template used for requesting a page from a MediaWiki appserver
+      mw_req:
+        method: get
+        uri: https://{{domain}}/w/index.php
+        query:
+          title: '{{request.params.title}}'
+        headers:
+          user-agent: '{{user-agent}}'
+          accept-language: '{{accept-language}}'
       # whether to print extra debug info
       debug: true
