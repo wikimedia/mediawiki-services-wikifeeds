@@ -21,7 +21,10 @@ const BLACKLIST = [
     'La7',
     'Vagina',
     'کس', // mznwiki
-    'مقعد' // mznwiki
+    'مقعد', // mznwiki
+    'Tobias_Sammet', // dewiki T238942
+    'Avantasia', // dewiki T238942
+    'Edguy' // dewiki T238942
 ];
 
 module.exports = BLACKLIST;
