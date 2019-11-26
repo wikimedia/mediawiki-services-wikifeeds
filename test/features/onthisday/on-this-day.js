@@ -43,10 +43,10 @@ describe('onthisday', function() {
     }
 
     for (const type of eventTypes) {
-        it(`${type}: unsupported language throws 501`, () => {
+        it(`${type}: unsupported language throws 404`, () => {
             return getJanuary30ResponseForEndpointName(type, 'nl')
             .catch((error) => {
-                assert.deepEqual(error.status, 501);
+                assert.deepEqual(error.status, 404);
             });
         });
 
