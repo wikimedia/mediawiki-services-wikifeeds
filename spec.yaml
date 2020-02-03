@@ -603,6 +603,47 @@ paths:
             status: 204
             body: ''
 
+  # from routes/page/random.js
+  /{domain}/v1/page/random/title:
+    get:
+      tags:
+        - Feed
+      summary: Get a random article title.
+      description: |
+        Gets the title of a randomly picked article from main namespace.
+        Preference is given to articles with a thumbnail and an associated Wikidata description.
+      produces:
+        - application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Random/0.7.0"
+        - application/problem+json
+      parameters:
+        - $ref: '#/parameters/domain'
+      responses:
+        200:
+          description: A random (good) article title
+          schema:
+            $ref: '#/definitions/random'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/problem'
+        default:
+          $ref: "#/definitions/problem"
+      x-amples:
+        - title: retrieve a random article title
+          response:
+            status: 200
+            headers:
+              content-type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Random/0.7.0"
+              vary: /.+/
+              access-control-allow-origin: '*'
+              access-control-allow-headers: accept, x-requested-with, content-type
+              content-security-policy: default-src
+              x-content-security-policy: default-src
+              x-frame-options: SAMEORIGIN
+            body:
+              items:
+                - title: /.+/
+
 definitions:
   # A https://tools.ietf.org/html/draft-nottingham-http-problem
   problem:
@@ -1015,3 +1056,13 @@ definitions:
     required:
       - title
       - url
+
+  random:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/components/schemas/article_title'
+    required:
+      - items
