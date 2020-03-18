@@ -41,6 +41,7 @@ There are a few routes you may query (with a browser, or `curl` and friends). Yo
 * `http://localhost:8889/en.wikipedia.org/v1/media/image/featured/2016/05/30`
 * `http://localhost:8889/en.wikipedia.org/v1/page/news`
 * `http://localhost:8889/en.wikipedia.org/v1/page/most-read/2016/05/30`
+* `http://localhost:8889/en.wikipedia.org/v1/page/random/title`
 * `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/births/05/30`
 * `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/deaths/05/30`
 * `http://localhost:8889/en.wikipedia.org/v1/feed/onthisday/events/05/30`

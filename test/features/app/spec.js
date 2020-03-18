@@ -326,6 +326,12 @@ describe('Swagger spec', function() {
 
         // Valid non-aggregated requests
 
+        // TODO: fix the spec
+        it.skip('random response should conform to schema', () => {
+            const uri = `${baseUri}page/random/title`;
+            return assertValidSchema(uri, '#/components/schemas/random');
+        });
+
         it('featured article response should conform to schema', () => {
             const uri = `${baseUri}page/featured/${dateStr1}`;
             return assertValidSchema(uri, '#/definitions/article_summary_merge_link');
