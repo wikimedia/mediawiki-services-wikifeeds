@@ -15,8 +15,7 @@ describe('news headline selectors', function() {
      * @return {!Document}
     */
     function readTestDoc(lang) {
-        const timestamp = '2018-03-21';
-        const filename = `test/fixtures/news-site-${lang}-${timestamp}.htm`;
+        const filename = `test/fixtures/news-site-${lang}.html`;
         const html = fs.readFileSync(filename);
         return domino.createDocument(html);
     }
