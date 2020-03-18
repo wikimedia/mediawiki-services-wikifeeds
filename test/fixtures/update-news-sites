@@ -5,7 +5,7 @@
 const fs = require('fs');
 const dateUtil = require('../../lib/date-util');
 const preq = require('preq');
-const NEWS_SITES = require('../../etc/feed/news-sites');
+const NEWS_SITES = require('../../etc/news-sites');
 
 const timestamp = dateUtil.formatISODate(new Date());
 
