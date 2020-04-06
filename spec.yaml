@@ -917,6 +917,7 @@ definitions:
           enum:
             - iOSApp
             - iOSAppV2
+            - iOSAppV3
             - AndroidApp
             - AndroidAppV2
       text:
@@ -976,6 +977,16 @@ definitions:
         type: integer
         description: |
           (AndroidAppV2 only) height, in device-independent pixels, of the image portion of the announcement card
+      articleTitles:
+        type: array
+        description: |
+          (iOSAppV3+ only, survey type only) Array of article titles that will display the survey announcement.
+        items:
+          type: string
+      displayDelay:
+        type: integer
+        description: |
+          (iOSAppV3+ only, survey type only) Number in seconds to wait for survey announcement to appear after content load.
     required:
       - id
       - type
@@ -983,7 +994,6 @@ definitions:
       - end_time
       - platforms
       - text
-      - countries
       - action
 
   article_title:
