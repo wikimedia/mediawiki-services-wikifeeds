@@ -30,12 +30,17 @@ describe('lib:announcements', () => {
         const res = mut.getAnnouncements(activeAnnouncementDomain);
 
         const fundraisingCampaign = fundraisingCampaigns[0];
-        const surveyCampaign = surveyCampaigns[0];
-        if (mut.testing.hasEnded(fundraisingCampaign, new Date()) && mut.testing.hasEnded(surveyCampaign, new Date())) {
+        let allSurveysEnded = true;
+        surveyCampaigns.forEach((survey) => {
+            if (!mut.testing.hasEnded(survey, new Date())) {
+                allSurveysEnded = false;
+            }
+        });
+        if (mut.testing.hasEnded(fundraisingCampaign, new Date()) && allSurveysEnded) {
             assert.ok(res.announce.length === 0);
         } else if (mut.testing.hasEnded(fundraisingCampaign, new Date())) {
             assert.ok(res.announce.length === 1);
-        } else if (mut.testing.hasEnded(surveyCampaign, new Date())) {
+        } else if (allSurveysEnded) {
             assert.ok(res.announce.length === 18);
         } else {
             assert.ok(res.announce.length === 19);
@@ -146,6 +151,9 @@ describe('lib:announcements:etc', () => {
 
     surveyCampaigns.forEach(campaign => {
 
+        if (campaign !== 'IOSSURVEY20') {
+            return;
+        }
         const announcements = mut.testing.getAnnouncementsForCampaign(campaign);
 
         it('iOS survey announcement should have at least one normalized string in article titles', () => {

@@ -93,7 +93,18 @@ const campaigns = [
         type: AnnouncementType.SURVEY,
         startTime: '2020-05-08T00:00:00Z',
         endTime: '2020-05-11T23:59:00Z',
-        idPrefix: 'SURVEY20',
+        idPrefix: 'IOSSURVEY20',
+        domain: 'en.wikipedia.org',
+        activeWikis: [
+            'en.wikipedia.org'
+        ],
+        countryVars: null
+    },
+    {
+        type: AnnouncementType.SURVEY,
+        startTime: '2020-05-12T00:00:00Z',
+        endTime: '2020-05-31T23:59:00Z',
+        idPrefix: 'ANDROIDSURVEY20',
         domain: 'en.wikipedia.org',
         activeWikis: [
             'en.wikipedia.org'
