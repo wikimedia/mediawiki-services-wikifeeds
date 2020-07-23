@@ -53,7 +53,7 @@ module.exports = {
     test: new NewsSite('InTheNewsFormatExample', STORY_SELECTOR, TOPIC_SELECTOR_BOLD_LINK),
     bs: new NewsSite('Šablon:Vijesti', STORY_SELECTOR, TOPIC_SELECTOR_BOLD_LINK),
     da: new NewsSite('Skabelon:Forside_aktuelle_begivenheder', 'div > ul > li', TOPIC_SELECTOR_BOLD_LINK),
-    de: new NewsSite('Wikipedia:Hauptseite/Aktuelles', 'li', TOPIC_SELECTOR_LINK),
+    de: new NewsSite('Wikipedia:Hauptseite/Aktuelles', 'ul:not(.breadcrumb-nav-container) > li', TOPIC_SELECTOR_LINK),
     el: new NewsSite('Πύλη:Τρέχοντα_γεγονότα/Επικεφαλίδες', 'li', TOPIC_SELECTOR_LINK),
     en: new NewsSite('Template:In_the_news', 'section > ul > li', TOPIC_SELECTOR_BOLD_LINK),
     es: new NewsSite('Portal:Actualidad', 'table:nth-of-type(1) > tbody > tr > td > ul:nth-of-type(1) > li', TOPIC_SELECTOR_LINK),
