@@ -14,7 +14,8 @@ describe('featured-unit', () => {
     it('isSupported should return the correct boolean', () => {
         assert.deepEqual(featured.testing.isSupported('en.wikipedia.org'), true);
         assert.deepEqual(featured.testing.isSupported('de.wikipedia.org'), true);
-        assert.deepEqual(featured.testing.isSupported('zh.wikipedia.org'), false);
+        assert.deepEqual(featured.testing.isSupported('zh.wikipedia.org'), true);
+        assert.deepEqual(featured.testing.isSupported('ko.wikipedia.org'), false);
         assert.deepEqual(featured.testing.isSupported('en.wikipedia.beta.wmflabs.org'), false);
     });
 
