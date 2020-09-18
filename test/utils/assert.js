@@ -5,7 +5,27 @@
 
 const assert = require('assert');
 const _ = require('lodash');
+const yaml = require('js-yaml');
+const Ajv = require('ajv');
+const fs = require('fs');
 
+let summaryValidator;
+function getSummaryValidator() {
+    if (summaryValidator) {
+        return summaryValidator;
+    }
+    const spec = yaml.safeLoad(fs.readFileSync(`${__dirname}/../../spec.yaml`));
+    const ajv = new Ajv({});
+    Object.keys(spec.definitions).forEach((defName) => {
+        ajv.addSchema(spec.definitions[defName], `#/definitions/${defName}`);
+    });
+    summaryValidator = (object, message) => {
+        if (!ajv.validate('#/definitions/summary', object)) {
+            throw new assert.AssertionError({ message: message ? message : ajv.errorsText() });
+        }
+    }
+    return summaryValidator;
+}
 
 function deepEqual(result, expected, message) {
 
@@ -98,7 +118,14 @@ function closeTo(result, expected, delta, message) {
         message || `Result is ${result}; expected ${expected} ± ${delta}`);
 }
 
-
+/**
+ * Asserts that the passed object is a valid response summary.
+ * @param {!Object} object
+ * @param {?string} message
+ */
+function isSummary(object, message) {
+    getSummaryValidator()(object, message);
+}
 
 
 
@@ -111,5 +138,6 @@ module.exports.notDeepEqual   = notDeepEqual;
 module.exports.contentType    = contentType;
 module.exports.status         = status;
 module.exports.closeTo        = closeTo;
+module.exports.isSummary      = isSummary;
 module.exports.AssertionError = assert.AssertionError;
 

@@ -24,6 +24,9 @@ router.get('/news', (req, res) => {
     .then((response) => {
         if (response.payload) {
             util.setETag(res, response.meta && response.meta.etag);
+            if (response.meta.vary) {
+                res.header('vary', response.meta.vary.join(','));
+            }
             util.setContentType(res, util.CONTENT_TYPES.unpublished);
             res.status(200).json(response.payload);
         } else {

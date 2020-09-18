@@ -291,7 +291,8 @@ paths:
                 - text: /.+/
                   year: /.+/
                   pages:
-                    - $merge: [ /.+/ ]
+                    - title: /.+/
+
 
   # from routes/feed/featured.js
   /{domain}/v1/page/featured/{year}/{month}/{day}:
@@ -313,7 +314,7 @@ paths:
         200:
           description: The title of a Wikipedia's Featured Article of the Day
           schema:
-            $ref: '#/definitions/article_summary_merge_link'
+            $ref: '#/definitions/summary'
         204:
           description: Empty response (for feed content aggregation requests from RESTBase)
           schema:
@@ -353,7 +354,8 @@ paths:
               x-content-security-policy: default-src
               x-frame-options: SAMEORIGIN
             body:
-              $merge: [ /.+/ ]
+              title: /.+/
+              extract: /.+/
         - title: retrieve featured article info for unsupported site (with aggregated=true)
           request:
             params:
@@ -507,7 +509,8 @@ paths:
               articles:
                 - views: /.+/
                   rank: /.+/
-                  $merge: [ /.+/ ]
+                  title: /.+/
+                  extract: /.+/
         - title: retrieve the most-read articles for January 1, 2016 (with aggregated=true)
           request:
             params:
@@ -532,7 +535,8 @@ paths:
               articles:
                 - views: /.+/
                   rank: /.+/
-                  $merge: [ /.+/ ]
+                  title: /.+/
+                  extract: /.+/
         - title: retrieve most-read articles for date with no data (with aggregated=true)
           request:
             params:
@@ -592,7 +596,8 @@ paths:
             body:
               - story: /.+/
                 links:
-                  - $merge: [ /.+/ ]
+                  - title: /.+/
+                    extract: /.+/
         - title: get "In the News" content for unsupported language (with aggregated=true)
           request:
             params:
@@ -691,27 +696,23 @@ definitions:
     additionalProperties: false
 
   mostread_article:
-    type: object
-    properties:
-      $merge:
-        type: array
-        description: One-element array containing the link to the RESTBase summary for the article
-        items:
-          type: string
-      views:
-        type: integer
-        description: Number of views on the requested day
-      view_history:
-        type: array
-        items:
-          $ref: '#/definitions/dated_pageview'
-      rank:
-        type: integer
-        description: Position in the list of most viewed articles
-    required:
-      - $merge
-      - views
-      - rank
+    allOf:
+      - $ref: '#/definitions/summary'
+      - type: object
+        properties:
+          views:
+            type: integer
+            description: Number of views on the requested day
+          view_history:
+            type: array
+            items:
+              $ref: '#/definitions/dated_pageview'
+          rank:
+            type: integer
+            description: Position in the list of most viewed articles
+        required:
+          - views
+          - rank
 
   mostread:
     type: object
@@ -743,7 +744,7 @@ definitions:
           type: array
           description: List of pages related to the event
           items:
-            $ref: '#/definitions/article_summary_merge_link'
+            $ref: '#/definitions/summary'
     required:
       - text
       - pages
@@ -775,7 +776,7 @@ definitions:
         description: |
           A collection of pages mentioned in the headline. The first page is the headline topic.
         items:
-          $ref: '#/definitions/article_summary_merge_link'
+          $ref: '#/definitions/summary'
     required:
       - story
       - links
@@ -1005,17 +1006,6 @@ definitions:
     required:
       - title
 
-  article_summary_merge_link:
-    type: object
-    properties:
-      $merge:
-        type: array
-        description: One-element array containing the link to the RESTBase summary for the article
-        items:
-          type: string
-    required:
-      - $merge
-
   image_props:
     type: object
     properties:
@@ -1073,6 +1063,154 @@ definitions:
       items:
         type: array
         items:
-          $ref: '#/components/schemas/article_title'
+          $ref: '#/definitions/article_title'
     required:
       - items
+
+  titles_set:
+    type: object
+    description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
+    properties:
+      canonical:
+        type: string
+        description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
+      normalized:
+        type: string
+        description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
+      display:
+        type: string
+        description: the title as it should be displayed to the user
+    required:
+      - canonical
+      - normalized
+      - display
+
+  content_urls:
+    type: object
+    properties:
+      page:
+        type: string
+        description: the canonical page URL
+      revisions:
+        type: string
+        description: the revision history page URL
+      edit:
+        type: string
+        description: the (desktop) URL for editing the page
+      talk:
+        type: string
+        description: the talk page URL, if applicable
+    required:
+      - page
+      - revisions
+      - edit
+    additionalProperties: false
+
+  summary:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Type of page summary
+        enum:
+          - standard
+          - disambiguation
+          - no-extract
+          - mainpage
+      titles:
+        $ref: '#/definitions/titles_set'
+      title:
+        deprecated: true
+        type: string
+        description: |
+          The page title.
+          Deprecated: Use `titles.normalized` instead.
+      displaytitle:
+        deprecated: true
+        type: string
+        description: |
+          The page title how it should be shown to the user.
+          Deprecated: Use `titles.display` instead.
+      namespace:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: the numeric ID for the page's namespace (https://www.mediawiki.org/wiki/Manual:Namespace)
+          text:
+            type: string
+            description: localized text name for the MediaWiki namespace
+        required: [ id, text ]
+        additionalProperties: false
+      wikibase_item:
+        type: string
+        description: the Wikibase item ID for the associated Wikidata entity (if any)
+      pageid:
+        type: integer
+        description: The page ID
+      revision:
+        type: string
+        description: The revision of the page when the summary was produced
+      tid:
+        type: string
+        description: The timeuuid associated with the underlying HTML content
+      extract:
+        type: string
+        description: First several sentences of an article in plain text
+      extract_html:
+        type: string
+        description: First several sentences of an article in simple HTML format
+      thumbnail:
+        $ref: '#/definitions/image_props'
+      originalimage:
+        $ref: '#/definitions/image_props'
+      lang:
+        type: string
+        description: The page language code
+        example: en
+      dir:
+        type: string
+        description: The page language direction code
+        enum:
+          - ltr
+          - rtl
+      timestamp:
+        type: string
+        format: date-time
+        description: The time when the page was last edited in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+        example: '1970-01-01T00:00:00.000Z'
+      description:
+        type: string
+        description: short description for the page
+        example: American poet
+      content_urls:
+        type: object
+        properties:
+          desktop:
+            $ref: '#/definitions/content_urls'
+          mobile:
+            $ref: '#/definitions/content_urls'
+      coordinates:
+        type: object
+        description: The coordinates of the item
+        properties:
+          lat:
+            type: number
+            description: The latitude
+          lon:
+            type: number
+            description: The longitude
+        required: [ 'lat', 'lon' ]
+    required:
+      - type
+      - titles
+      - title
+      - displaytitle
+      - pageid
+      - lang
+      - dir
+      - revision
+      - timestamp
+      - content_urls
+      - extract
+      - extract_html

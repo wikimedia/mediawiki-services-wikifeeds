@@ -342,38 +342,6 @@ describe('onthisday-unit', () => {
         assert.deepEqual(sortedEvents[3].year, -516);
     });
 
-    it("'title' keys should be replaced with '$merge' keys", () => {
-        const events = onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, 'en');
-        events.push(onThisDay.wmfHolidayFromListElement(MARTYRDOM_HOLIDAY_LIST_ELEMENT));
-
-        // Initially each page should have a title key but no $merge key
-        for (const event of events) {
-            for (const page of event.pages) {
-                assert.ok(Object.prototype.hasOwnProperty.call(page, 'title'));
-                assert.ok(Object.prototype.hasOwnProperty.call(page, '$merge') === false);
-                assert.ok(page.title !== null);
-            }
-        }
-
-        onThisDay.createMergeNodes(rbTemplate, events, REQUEST_FOR_EN_01_30);
-
-        // After creating merge nodes, each page should have a $merge key but no title key
-        for (const event of events) {
-            for (const page of event.pages) {
-                assert.ok(Object.prototype.hasOwnProperty.call(page, '$merge'));
-                assert.ok(Object.prototype.hasOwnProperty.call(page, 'title') === false);
-                assert.ok(page.$merge !== null);
-            }
-        }
-
-        // Confirm expected number of pages exist
-        assert.deepEqual(events[0].pages.length, 1);
-        assert.deepEqual(events[1].pages.length, 4);
-        assert.deepEqual(events[2].pages.length, 2);
-        assert.deepEqual(events[3].pages.length, 1);
-        assert.deepEqual(events[4].pages.length, 5);
-    });
-
     describe('listElementsByHeadingID extracts expected number of births from', () => {
         it('DE fixture', () => {
             // https://de.wikipedia.org/api/rest_v1/page/html/1._Dezember

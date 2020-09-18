@@ -80,7 +80,7 @@ router.get('/all/:mm/:dd', (req, res) => {
 
         const revision = Math.max(dayRevision, selectionsRevision);
         const output = lib.everythingInDayAndSelectionsDocs(dayDoc, selectionsDoc, lang);
-        lib.endResponseWithOutput(app, res, output, req.params.domain, revision);
+        return lib.endResponseWithOutput(req, res, output, revision);
     });
 });
 

@@ -21,13 +21,7 @@ describe('news', function() {
                         res.body.forEach((elem) => {
                             assert.ok(elem.story, 'story should be present');
                             assert.ok(elem.links, 'links should be present');
-                            elem.links.forEach((link) => {
-                                assert.ok(link.$merge[0], '$merge should be present');
-                                assert.ok(link.$merge[0].indexOf('summary/wiki') === -1,
-                                    '$merge[0] link should not have the title start with wiki');
-                                assert.ok(link.missing === undefined,
-                                    'no missing links should be present');
-                            });
+                            elem.links.forEach(assert.isSummary);
                         });
                     });
             });

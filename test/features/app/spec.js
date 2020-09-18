@@ -334,7 +334,7 @@ describe('Swagger spec', function() {
 
         it('featured article response should conform to schema', () => {
             const uri = `${baseUri}page/featured/${dateStr1}`;
-            return assertValidSchema(uri, '#/definitions/article_summary_merge_link');
+            return assertValidSchema(uri, '#/definitions/summary');
         });
 
         it('featured image response should conform to schema', () => {
