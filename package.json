@@ -45,16 +45,16 @@
     "express": "^4.17.1",
     "http-shutdown": "^1.2.2",
     "js-yaml": "^3.14.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "mediawiki-title": "^0.7.3",
     "preq": "^0.5.14",
     "service-runner": "^2.7.8",
     "striptags": "^3.1.1",
     "swagger-router": "^0.7.4",
-    "swagger-ui-dist": "^3.31.1"
+    "swagger-ui-dist": "^3.34.0"
   },
   "devDependencies": {
-    "ajv": "^6.12.3",
+    "ajv": "^6.12.5",
     "csv-parse": "^4.12.0",
     "eslint-config-wikimedia": "^0.15.3",
     "eslint-plugin-jsdoc": "^18.11.0",
