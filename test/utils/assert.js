@@ -125,6 +125,11 @@ function closeTo(result, expected, delta, message) {
  */
 function isSummary(object, message) {
     getSummaryValidator()(object, message);
+    // Support legacy pre summary 2.0 clients.
+    assert.strictEqual( -1, object.title.indexOf(' '),
+        'Legacy clients: title uses _ and not spaces');
+    assert.ok( object.normalizedtitle,
+        'Legacy clients: has normalizedtitle property');
 }
 
 
