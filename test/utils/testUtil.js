@@ -17,6 +17,10 @@ testUtil.constructTestDate = function(dateObj) {
         dateUtil.pad(dateObj.getUTCDate())}`;
 };
 
+testUtil.findDuplicateTitles = arr => arr
+.map((item) => item.title)
+.filter((item, index, init) => init.indexOf(item) !== index);
+
 testUtil.rbTemplate = new Template({
     method: '{{request.method}}',
     uri: 'https://{{domain}}/api/rest_v1/{+path}',

@@ -2,6 +2,7 @@
 
 const server = require('../../utils/server.js');
 const assert = require('../../utils/assert.js');
+const testUtil = require('../../utils/testUtil');
 const preq = require('preq');
 
 const eventTypes = [
@@ -65,6 +66,17 @@ describe('onthisday', function() {
             assert.ok(response.body.events.length > 0, 'ALL should return some events');
             assert.ok(response.body.holidays.length > 0, 'ALL should return some holidays');
             assert.ok(response.body.selected.length > 0, 'ALL should return some selected');
+        });
+    });
+
+    it('filters out duplicate articles from pages', () => {
+        return getJanuary30ResponseForEndpointName('all')
+        .then((response) => {
+            ['births', 'deaths', 'events', 'holidays', 'selected'].forEach((type) => {
+                response.body[type].forEach((event) => {
+                    assert.deepEqual([], testUtil.findDuplicateTitles(event.pages));
+                });
+            });
         });
     });
 });

@@ -3,6 +3,7 @@
 const preq = require('preq');
 const assert = require('../../utils/assert');
 const server = require('../../utils/server');
+const testUtil = require('../../utils/testUtil');
 
 describe('most-read articles', function() {
 
@@ -17,6 +18,14 @@ describe('most-read articles', function() {
             .then((res) => {
                 assert.deepEqual(res.body.articles[0].view_history[4].date, dayPrior);
             });
+    });
+
+    it('Should drop duplicate pageviews', () => {
+        const uri = `${server.config.uri}en.wikipedia.org/v1/page/most-read/2017/01/10`;
+        return preq.get({ uri, query: { aggregated: true } })
+        .then((res) => {
+            assert.deepEqual([], testUtil.findDuplicateTitles(res.body.articles));
+        });
     });
 
     it('Should filter out missing summaries', () => {

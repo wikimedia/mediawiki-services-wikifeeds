@@ -39,5 +39,18 @@ describe('util', () => {
         }, () => {
             // expected
         })
-    })
+    });
+
+    describe('removeDuplicateTitles', () => {
+        it('deduplicates and applies update function', () => {
+            const data = [ { title: 'Foo', count: 1 }, { title: 'Foo', count: 1 } ];
+            const update = (orig, dupe) => {
+                orig.count += dupe.count;
+                return orig;
+            };
+            const result = util.removeDuplicateTitles(data, update);
+            assert.deepEqual(result.length, 1);
+            assert.deepEqual(result[0].count, 2);
+        });
+    });
 });
