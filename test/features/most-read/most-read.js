@@ -1,9 +1,16 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+const parse = require('csv-parse/lib/sync');
 const preq = require('preq');
 const assert = require('../../utils/assert');
 const server = require('../../utils/server');
 const testUtil = require('../../utils/testUtil');
+const mostRead = require('../../../lib/most-read')
+
+const file = fs.readFileSync(path.resolve(__dirname, '../../../private/mainpages.csv'), 'utf8');
+const mainPageTitles = parse(file, 'utf8')[0];
 
 describe('most-read articles', function() {
 
@@ -34,25 +41,6 @@ describe('most-read articles', function() {
         .then((res) => res.body.articles.forEach((article) => assert.isSummary(article)));
     });
 
-    it('Should throw 404 for request with no results', () => {
-        const uri = `${server.config.uri}zh-classical.wikipedia.org/v1/page/most-read/2016/11/12`;
-        return preq.get({ uri })
-            .then((res) => {
-                throw new Error(`Expected an error but got status: ${res.status}`);
-            }, (err) => {
-                assert.status(err, 404);
-            });
-    });
-
-    it('Should return 204 for request with no results, aggregated=true', () => {
-        const uri = `${server.config.uri}zh-classical.wikipedia.org/v1/page/most-read/2016/11/12`;
-        return preq.get({ uri, query: { aggregated: true } })
-            .then((res) => {
-                assert.status(res, 204);
-                assert.deepEqual(!!res.body, false, 'Expected the body to be empty');
-            });
-    });
-
     it('Should return 204 for fywiki requests', () => {
         const uri = `${server.config.uri}fy.wikipedia.org/v1/page/most-read/2016/11/12`;
         return preq.get({ uri })
@@ -60,5 +48,23 @@ describe('most-read articles', function() {
                 assert.status(res, 204);
                 assert.deepEqual(!!res.body, false, 'Expected the body to be empty');
             });
+    });
+
+    it('main page filtering RegExp should handle all main page title chars', () => {
+        const articles = [{
+            pageid: 0,
+            namespace: {
+                id: 0,
+                text: ''
+            },
+            titles: {
+                canonical: 'Hello_world!',
+                normalized: 'Hello world',
+                display: 'Hello world'
+            }
+        }];
+        mainPageTitles.forEach((title) => {
+            assert.ok(mostRead.filterSpecial(articles, title));
+        });
     });
 });
