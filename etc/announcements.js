@@ -25,9 +25,9 @@ const Platform = {
 const campaigns = [
     {
         type: AnnouncementType.FUNDRAISING,
-        startTime: '2019-12-02T00:00:00Z',
-        endTime: '2019-12-31T23:59:00Z',
-        idPrefix: 'FUNDRAISING19',
+        startTime: '2020-11-30T00:00:00Z',
+        endTime: '2020-12-31T23:59:00Z',
+        idPrefix: 'FUNDRAISING20',
         domain: 'en.wikipedia.org',
         activeWikis: [
             'en.wikipedia.org'
@@ -36,7 +36,6 @@ const campaigns = [
             us: {
                 country: 'the U.S.',
                 currency: '$',
-                average: 16.36,
                 coffee: 2.75,
                 border: true,
                 placement: 'article',
@@ -45,7 +44,6 @@ const campaigns = [
             gb: {
                 country: 'the UK',
                 currency: '£',
-                average: 10,
                 coffee: 2,
                 border: true,
                 placement: 'article',
@@ -54,7 +52,6 @@ const campaigns = [
             au: {
                 country: 'Australia',
                 currency: '$',
-                average: 15,
                 coffee: 2.75,
                 border: true,
                 placement: 'article',
@@ -63,7 +60,6 @@ const campaigns = [
             ca: {
                 country: 'Canada',
                 currency: '$',
-                average: 15,
                 coffee: 2.75,
                 border: true,
                 placement: 'article',
@@ -72,7 +68,6 @@ const campaigns = [
             nz: {
                 country: 'New Zealand',
                 currency: '$',
-                average: 15,
                 coffee: 2.75,
                 border: true,
                 placement: 'article',
@@ -81,7 +76,6 @@ const campaigns = [
             ie: {
                 country: 'Ireland',
                 currency: '€',
-                average: 10,
                 coffee: 2,
                 border: true,
                 placement: 'article',
