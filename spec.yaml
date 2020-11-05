@@ -919,6 +919,7 @@ definitions:
             - iOSApp
             - iOSAppV2
             - iOSAppV3
+            - iOSAppV4
             - AndroidApp
             - AndroidAppV2
       text:
@@ -988,6 +989,10 @@ definitions:
         type: integer
         description: |
           (iOSAppV3+ only, survey type only) Number in seconds to wait for survey announcement to appear after content load.
+      percent_receiving_experiment:
+        type: integer
+        description: |
+          (iOSAppV4+ only, survey type only) Integer between 0 and 100 representing the percentage of users that will fall into the iOS Article as a Living Document experiment. This percentage will see the feature, the others will not. Both groups will see the survey announcement.
     required:
       - id
       - type

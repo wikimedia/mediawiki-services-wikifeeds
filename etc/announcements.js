@@ -18,6 +18,7 @@ const Platform = {
     IOS: 'iOSApp',
     IOS_V2: 'iOSAppV2',
     IOS_V3: 'iOSAppV3',
+    IOS_V4: 'iOSAppV4',
     ANDROID_V1: 'AndroidApp',
     ANDROID_V2: 'AndroidAppV2'
 };
@@ -91,8 +92,8 @@ const campaigns = [
     },
     {
         type: AnnouncementType.SURVEY,
-        startTime: '2020-07-07T00:00:00Z',
-        endTime: '2020-07-14T23:59:00Z',
+        startTime: '2020-11-09T00:00:00Z',
+        endTime: '2020-11-30T23:59:00Z',
         idPrefix: 'IOSSURVEY20',
         domain: 'en.wikipedia.org',
         activeWikis: [
