@@ -5,7 +5,7 @@ Dockerfile
 coverage
 
 .nyc_output
-config.yaml
+./config.yaml
 node_modules
 npm-debug.log
 
