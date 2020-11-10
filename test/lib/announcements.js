@@ -96,6 +96,7 @@ describe('lib:announcements:etc', () => {
                 assert.ok(announcement.platforms.includes('iOSApp'));
                 assert.ok(!announcement.platforms.includes('iOSAppV2'));
                 assert.ok(!announcement.platforms.includes('iOSAppV3'));
+                assert.ok(!announcement.platforms.includes('iOSAppV4'));
             });
         });
 
@@ -104,7 +105,8 @@ describe('lib:announcements:etc', () => {
             announcements.forEach((announcement) => {
                 assert.ok(!announcement.platforms.includes('iOSApp'));
                 assert.ok(announcement.platforms.includes('iOSAppV2'));
-                assert.ok(!announcement.platforms.includes('iOSAppV3'));
+                assert.ok(announcement.platforms.includes('iOSAppV3'));
+                assert.ok(announcement.platforms.includes('iOSAppV4'));
             });
         });
 
