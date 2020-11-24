@@ -207,7 +207,7 @@ paths:
             status: 200
             headers:
               content-type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Announcements/0.3.0"
-              cache-control: public, max-age=7200, s-maxage=14400
+              cache-control: public, max-age=86400, s-maxage=900
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
               access-control-allow-origin: '*'
