@@ -86,8 +86,8 @@ const campaigns = [
     },
     {
         type: AnnouncementType.SURVEY,
-        startTime: '2020-12-01T00:00:00Z',
-        endTime: '2021-02-01T23:59:00Z',
+        startTime: '2020-11-01T00:00:00Z',
+        endTime: '2020-11-02T23:59:00Z',
         idPrefix: 'IOSSURVEY20',
         domain: 'en.wikipedia.org',
         activeWikis: [
