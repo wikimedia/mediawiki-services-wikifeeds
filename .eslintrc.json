@@ -1,4 +1,5 @@
 {
+	"root": true,
 	"extends": "eslint-config-wikimedia/server",
 	"plugins": [
 		"json",
@@ -26,7 +27,13 @@
 			"never"
 		],
 		"computed-property-spacing": "off",
-		"no-multi-spaces":	"off",
-		"array-bracket-spacing": "off"
+		"no-multi-spaces": "off",
+		"array-bracket-spacing": "off",
+		"array-callback-return": "warn",
+		"default-param-last": "warn",
+		"no-process-exit": "warn",
+		"no-shadow": "warn",
+		"node/no-missing-require": "warn",
+		"strict": "warn"
 	}
 }
