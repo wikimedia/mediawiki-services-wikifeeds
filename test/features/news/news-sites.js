@@ -24,7 +24,7 @@ describe('news headline selectors', function() {
         it(`${lang} news headlines should be general not categorical`, () => {
             const doc = readTestDoc(lang);
             const headlines = doc.querySelectorAll(NEWS_SITES[lang].headlineSelectorAll);
-            assert.closeTo(headlines.length, 5, 3);
+            assert.closeTo(headlines.length, 8, 6);
         });
 
         it(`${lang} news headline topics should be nonnull`, () => {
@@ -40,7 +40,7 @@ describe('news headline selectors', function() {
         const doc = readTestDoc(lang);
         const headlines = doc.querySelectorAll(NEWS_SITES[lang].headlineSelectorAll);
         const topic = headlines[2].querySelector(NEWS_SITES[lang].topicAnchorSelector);
-        assert.deepEqual(topic.getAttribute('href'), './Poisoning_of_Sergei_and_Yulia_Skripal');
+        assert.deepEqual(topic.getAttribute('href'), './Porfirije,_Serbian_Patriarch');
     });
 
     it('news headline topic should be the first link when no link is bolded', () => {
@@ -49,6 +49,6 @@ describe('news headline selectors', function() {
         const headlines = doc.querySelectorAll(NEWS_SITES[lang].headlineSelectorAll);
         const topic = headlines[1].querySelector(NEWS_SITES[lang].topicAnchorSelector);
         assert.deepEqual(topic.getAttribute('href'),
-            './Campeonato_Mundial_de_Patinaje_Artístico_sobre_Hielo_de_2018');
+            './Escándalo_por_vacunatorio_VIP_en_el_Ministerio_de_Salud_de_Argentina');
     });
 });

@@ -56,7 +56,7 @@ module.exports = {
     de: new NewsSite('Wikipedia:Hauptseite/Aktuelles', 'ul:not(.breadcrumb-nav-container) > li', TOPIC_SELECTOR_LINK),
     el: new NewsSite('Πύλη:Τρέχοντα_γεγονότα/Επικεφαλίδες', 'li', TOPIC_SELECTOR_LINK),
     en: new NewsSite('Template:In_the_news', 'section > ul > li', TOPIC_SELECTOR_BOLD_LINK),
-    es: new NewsSite('Portal:Actualidad', 'table:nth-of-type(1) > tbody > tr > td > ul:nth-of-type(1) > li', TOPIC_SELECTOR_LINK),
+    es: new NewsSite('Portal:Actualidad', 'div:nth-of-type(2) > div > ul:nth-of-type(1) > li', TOPIC_SELECTOR_LINK),
     fi: new NewsSite('Malline:Uutisissa', 'body > section > ul > li', TOPIC_SELECTOR_BOLD_LINK),
     fr: new NewsSite('Modèle:Accueil_actualité', 'section > div > ul > li', TOPIC_SELECTOR_BOLD_LINK),
     he: new NewsSite('תבנית:חדשות_ואקטואליה', 'section > ul > li', TOPIC_SELECTOR_LINK),
