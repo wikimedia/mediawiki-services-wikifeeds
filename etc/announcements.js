@@ -19,6 +19,7 @@ const Platform = {
     IOS_V2: 'iOSAppV2',
     IOS_V3: 'iOSAppV3',
     IOS_V4: 'iOSAppV4',
+    IOS_V5: 'iOSAppV5',
     ANDROID_V1: 'AndroidApp',
     ANDROID_V2: 'AndroidAppV2'
 };
@@ -86,9 +87,20 @@ const campaigns = [
     },
     {
         type: AnnouncementType.SURVEY,
-        startTime: '2020-11-01T00:00:00Z',
-        endTime: '2020-11-02T23:59:00Z',
+        startTime: '2021-06-21T00:00:00Z',
+        endTime: '2021-07-21T23:59:00Z',
         idPrefix: 'IOSSURVEY20',
+        domain: 'en.wikipedia.org',
+        activeWikis: [
+            'en.wikipedia.org'
+        ],
+        countryVars: null
+    },
+    {
+        type: AnnouncementType.SURVEY,
+        startTime: '2021-06-21T00:00:00Z',
+        endTime: '2021-07-21T23:59:00Z',
+        idPrefix: 'IOSAAALDSURVEY',
         domain: 'en.wikipedia.org',
         activeWikis: [
             'en.wikipedia.org'

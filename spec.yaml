@@ -920,6 +920,7 @@ definitions:
             - iOSAppV2
             - iOSAppV3
             - iOSAppV4
+            - iOSAppV5
             - AndroidApp
             - AndroidAppV2
       text:

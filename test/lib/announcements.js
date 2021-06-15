@@ -39,7 +39,7 @@ describe('lib:announcements', () => {
         if (mut.testing.hasEnded(fundraisingCampaign, new Date()) && allSurveysEnded) {
             assert.ok(res.announce.length === 0);
         } else if (mut.testing.hasEnded(fundraisingCampaign, new Date())) {
-            assert.ok(res.announce.length === 1);
+            assert.ok(res.announce.length >= 1);
         } else if (allSurveysEnded) {
             assert.ok(res.announce.length === 18);
         } else {
