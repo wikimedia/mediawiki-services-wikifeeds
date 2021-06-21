@@ -87,7 +87,7 @@ const campaigns = [
     },
     {
         type: AnnouncementType.SURVEY,
-        startTime: '2021-06-21T00:00:00Z',
+        startTime: '2021-06-24T00:00:00Z',
         endTime: '2021-07-21T23:59:00Z',
         idPrefix: 'IOSSURVEY20',
         domain: 'en.wikipedia.org',
@@ -98,7 +98,7 @@ const campaigns = [
     },
     {
         type: AnnouncementType.SURVEY,
-        startTime: '2021-06-21T00:00:00Z',
+        startTime: '2021-06-24T00:00:00Z',
         endTime: '2021-07-21T23:59:00Z',
         idPrefix: 'IOSAAALDSURVEY',
         domain: 'en.wikipedia.org',
