@@ -27,9 +27,9 @@ const Platform = {
 const campaigns = [
     {
         type: AnnouncementType.FUNDRAISING,
-        startTime: '2020-11-30T00:00:00Z',
-        endTime: '2020-12-31T23:59:00Z',
-        idPrefix: 'FUNDRAISING20',
+        startTime: '2021-11-30T00:00:00Z',
+        endTime: '2021-12-31T23:59:00Z',
+        idPrefix: 'FUNDRAISING21',
         domain: 'en.wikipedia.org',
         activeWikis: [
             'en.wikipedia.org'
