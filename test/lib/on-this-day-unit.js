@@ -65,13 +65,14 @@ const NON_TOPIC_ANCHOR = MOCK_ANCHORS[1];
 // MOCK LIST ELEMENTS
 
 const MOCK_EVENT_LIST_ELEMENTS =
-    elementsFromFixtureFile('event-and-holiday-list-elements.html', 'li');
+    elementsFromFixtureFile('event-and-holiday-list-elements.html', 'li, .event');
 const SEABISCUIT_SELECTED_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[0];
 const LIVIA_BIRTH_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[1];
 const TEMPLE_EVENT_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[2];
 const GANDHI_DEATH_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[3];
 const MARTYRDOM_HOLIDAY_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[4];
 const NON_EVENT_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[5];
+const ZHWIKI_FOUNDING_OF_ROME_DIV_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[9];
 
 // TESTS
 
@@ -157,7 +158,7 @@ describe('onthisday-unit', () => {
     describe('wmfEventFromListElement: WMFEvent model object is correctly created', () => {
         it('from a selected list element', () => {
             assert.deepEqual(
-                onThisDay.wmfEventFromListElement(SEABISCUIT_SELECTED_LIST_ELEMENT, 'en'),
+                onThisDay.wmfEventFromListElement(SEABISCUIT_SELECTED_LIST_ELEMENT, true, 'en'),
                 {
                     text: 'Canadian-American jockey George Woolf, who rode Seabiscuit to a ' +
                             'famous victory over War Admiral in 1938, was fatally injured when ' +
@@ -183,7 +184,7 @@ describe('onthisday-unit', () => {
         });
         it('from a birth list element', () => {
             assert.deepEqual(
-                onThisDay.wmfEventFromListElement(LIVIA_BIRTH_LIST_ELEMENT, 'en'),
+                onThisDay.wmfEventFromListElement(LIVIA_BIRTH_LIST_ELEMENT, false, 'en'),
                 {
                     text: 'Livia, Roman wife of Augustus (d. 29)',
                     pages: [
@@ -200,7 +201,7 @@ describe('onthisday-unit', () => {
         });
         it('from an event list element', () => {
             assert.deepEqual(
-                onThisDay.wmfEventFromListElement(TEMPLE_EVENT_LIST_ELEMENT, 'en'),
+                onThisDay.wmfEventFromListElement(TEMPLE_EVENT_LIST_ELEMENT, false, 'en'),
                 {
                     text: 'The Second Temple of Jerusalem finishes construction.',
                     pages: [
@@ -214,7 +215,7 @@ describe('onthisday-unit', () => {
         });
         it('from a death list element', () => {
             assert.deepEqual(
-                onThisDay.wmfEventFromListElement(GANDHI_DEATH_LIST_ELEMENT, 'en'),
+                onThisDay.wmfEventFromListElement(GANDHI_DEATH_LIST_ELEMENT, false, 'en'),
                 {
                     text: 'Mahatma Gandhi, Indian lawyer, philosopher, and activist (b. 1869)',
                     pages: [
@@ -226,8 +227,41 @@ describe('onthisday-unit', () => {
                 }
             );
         });
+        it('from a selected div element on zhwiki', () => {
+            assert.deepEqual(
+                onThisDay.wmfEventFromListElement(ZHWIKI_FOUNDING_OF_ROME_DIV_ELEMENT, true, 'zh'),
+                {
+                    text: '根据古罗马学者马库斯·特伦提乌斯·瓦罗的日期推测，罗慕路斯与两兄弟（图）在山开始建立罗马城。',
+                    pages: [
+                        {
+                            title: '前753年'
+                        },
+                        {
+                            title: '古罗马'
+                        },
+                        {
+                            title: "马库斯·特伦提乌斯·瓦罗"
+                        },
+                        {
+                            title: '罗马建城纪年'
+                        },
+                        {
+                            title: '罗慕路斯与雷穆斯'
+                        },
+                        {
+                            title: '帕拉蒂尼山'
+                        },
+                        {
+                            isTopic: true,
+                            title: '罗马的建立'
+                        }
+                    ],
+                    year: -753
+                }
+            );
+        });
         it('wmfEventFromListElement should return null for elements not describing events', () => {
-            assert.ok(onThisDay.wmfEventFromListElement(NON_EVENT_LIST_ELEMENT, 'en') === null);
+            assert.ok(onThisDay.wmfEventFromListElement(NON_EVENT_LIST_ELEMENT, false, 'en') === null);
         });
     });
 
@@ -263,7 +297,7 @@ describe('onthisday-unit', () => {
 
     it('eventsForYearListElements returns a WMFEvent for only year list elements', () => {
         assert.deepEqual(
-            onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, 'en').length, 4,
+            onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, false, 'en').length, 4,
             'Should return WMFEvent for each of 4 year list elements'
         );
     });
@@ -315,6 +349,11 @@ describe('onthisday-unit', () => {
             assert.deepEqual('1 bce – Bla bla'.match(regex)[2], 'bce');
             assert.ok('AD 1 – Bla bla'.match(regex)[2] === undefined);
         });
+        it('extracts expected BC/BCE strings in Chinese', () => {
+            const regex = languages.zh.yearListElementRegEx;
+            assert.deepEqual('前1年：Bla bla'.match(regex)[1], '前');
+            assert.deepEqual('前 1 年：Bla bla'.match(regex)[1], '前');
+        });
         it('AD strings should not be negated', () => {
             const regex = languages.en.yearListElementRegEx;
             assert.ok('4 AD – Bla bla'.match(regex)[2] === undefined,
@@ -334,7 +373,7 @@ describe('onthisday-unit', () => {
 
     it('Sort year list events in correct BC[E] aware manner', () => {
         const sortedEvents =
-            onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, 'en')
+            onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, false, 'en')
         .sort(onThisDay.reverseChronologicalWMFEventComparator);
         assert.deepEqual(sortedEvents[0].year, 1948);
         assert.deepEqual(sortedEvents[1].year, 1946);
@@ -607,7 +646,7 @@ describe('onthisday-unit', () => {
                   </li>
                 </ul>
               `).querySelector('#thisLI');
-            const event = onThisDay.wmfEventFromListElement(LI, 'en');
+            const event = onThisDay.wmfEventFromListElement(LI, false, 'en');
             assert.deepEqual(event.pages.length, 1);
             assert.deepEqual(event.pages[0].title, 'Dog');
         });
