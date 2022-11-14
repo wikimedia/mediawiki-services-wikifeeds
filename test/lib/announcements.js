@@ -28,23 +28,7 @@ describe('lib:announcements', () => {
 
     it('should return one or more announcements for active wiki', () => {
         const res = mut.getAnnouncements(activeAnnouncementDomain);
-
-        const fundraisingCampaign = fundraisingCampaigns[0];
-        let allSurveysEnded = true;
-        surveyCampaigns.forEach((survey) => {
-            if (!mut.testing.hasEnded(survey, new Date())) {
-                allSurveysEnded = false;
-            }
-        });
-        if (mut.testing.hasEnded(fundraisingCampaign, new Date()) && allSurveysEnded) {
-            assert.ok(res.announce.length === 0);
-        } else if (mut.testing.hasEnded(fundraisingCampaign, new Date())) {
-            assert.ok(res.announce.length >= 1);
-        } else if (allSurveysEnded) {
-            assert.ok(res.announce.length === 1);
-        } else {
-            assert.ok(res.announce.length === 19);
-        }
+        assert.ok(res.announce.length > 0);
     });
 });
 

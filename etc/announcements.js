@@ -46,9 +46,9 @@ const campaigns = [
     },
     {
         type: AnnouncementType.FUNDRAISING,
-        startTime: '2021-11-30T00:00:00Z',
-        endTime: '2021-12-31T23:59:00Z',
-        idPrefix: 'FUNDRAISING21',
+        startTime: '2022-11-29T00:00:00Z',
+        endTime: '2022-12-31T23:59:00Z',
+        idPrefix: 'FUNDRAISING22',
         domain: 'en.wikipedia.org',
         activeWikis: [
             'en.wikipedia.org'
