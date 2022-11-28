@@ -28,8 +28,8 @@ describe('lib:announcements', () => {
 
     it('should return one or more announcements for active wiki', () => {
         const res = mut.getAnnouncements(activeAnnouncementDomain);
-        // Update when there are fundraising announcements to be checked.
-        assert.ok(res.announce.length >= 0);
+        // Updated so that fundraising announcements are checked.
+        assert.ok(res.announce.length > 0);
     });
 });
 
