@@ -57,7 +57,7 @@ const campaigns = [
             us: {
                 country: 'the U.S.',
                 currency: '$',
-                coffee: 2.75,
+                coffee: 2,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Icons-cc-us.png'
@@ -73,7 +73,7 @@ const campaigns = [
             au: {
                 country: 'Australia',
                 currency: '$',
-                coffee: 2.75,
+                coffee: 2,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/6/6f/Icons-cc-gb-ie-au.png'
@@ -81,7 +81,7 @@ const campaigns = [
             ca: {
                 country: 'Canada',
                 currency: '$',
-                coffee: 2.75,
+                coffee: 2,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/4/4d/Icons-cc-nz-ca.png'
@@ -89,7 +89,7 @@ const campaigns = [
             nz: {
                 country: 'New Zealand',
                 currency: '$',
-                coffee: 2.75,
+                coffee: 2,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/4/4d/Icons-cc-nz-ca.png'
