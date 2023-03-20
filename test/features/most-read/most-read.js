@@ -67,4 +67,15 @@ describe('most-read articles', function() {
             assert.ok(mostRead.filterSpecial(articles, title));
         });
     });
+
+    it('Should filter out blocked titles from some languages, but not others', () => {
+        assert.ok(mostRead.isBlocked('es', 'Cleopatra'))
+        assert.ok(!mostRead.isBlocked('en', 'Cleopatra'))
+    });
+
+    it('Should filter out certain blocked titles from all wikis', () => {
+        assert.ok(mostRead.isBlocked('en', 'Index'))
+        assert.ok(mostRead.isBlocked('ru', 'Index'))
+        assert.ok(!mostRead.isBlocked('en', 'Cat'))
+    });
 });
