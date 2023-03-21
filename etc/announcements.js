@@ -46,6 +46,25 @@ const campaigns = [
     },
     {
         type: AnnouncementType.FUNDRAISING,
+        startTime: '2023-03-20T00:00:00Z',
+        endTime: '2023-04-12T00:00:00Z',
+        idPrefix: 'JAPANFUNDRAISING23',
+        domain: 'ja.wikipedia.org',
+        activeWikis: [
+            'ja.wikipedia.org'
+        ],
+        countryVars: {
+            ja: {
+                country: 'Japan',
+                currency: '¥',
+                coffee: 300,
+                border: true,
+                placement: 'article'
+            }
+        }
+    },
+    {
+        type: AnnouncementType.FUNDRAISING,
         startTime: '2022-11-29T00:00:00Z',
         endTime: '2022-12-31T23:59:00Z',
         idPrefix: 'FUNDRAISING22',

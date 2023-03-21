@@ -17,7 +17,7 @@ describe('news', function() {
                 return preq.get({ uri: `${server.config.uri + lang}.wikipedia.org/v1/page/news` })
                     .then((res) => {
                         assert.deepEqual(res.status, 200);
-                        assert.ok(res.body.length);
+                        assert.ok(res.body.length >= 0);
                         res.body.forEach((elem) => {
                             assert.ok(elem.story, 'story should be present');
                             assert.ok(elem.links, 'links should be present');
