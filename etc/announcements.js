@@ -54,7 +54,7 @@ const campaigns = [
             'ja.wikipedia.org'
         ],
         countryVars: {
-            ja: {
+            jp: {
                 country: 'Japan',
                 currency: '¥',
                 coffee: 300,
