@@ -237,23 +237,23 @@ describe('onthisday-unit', () => {
                             title: '前753年'
                         },
                         {
-                            title: '古罗马'
+                            title: '古羅馬'
                         },
                         {
-                            title: "马库斯·特伦提乌斯·瓦罗"
+                            title: "馬庫斯·特倫提烏斯·瓦羅"
                         },
                         {
-                            title: '罗马建城纪年'
+                            title: '羅馬建城紀年'
                         },
                         {
-                            title: '罗慕路斯与雷穆斯'
+                            title: '羅慕路斯與雷穆斯'
                         },
                         {
                             title: '帕拉蒂尼山'
                         },
                         {
                             isTopic: true,
-                            title: '罗马的建立'
+                            title: '羅馬的建立'
                         }
                     ],
                     year: -753
