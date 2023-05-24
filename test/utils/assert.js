@@ -14,7 +14,7 @@ function getSummaryValidator() {
     if (summaryValidator) {
         return summaryValidator;
     }
-    const spec = yaml.safeLoad(fs.readFileSync(`${__dirname}/../../spec.yaml`));
+    const spec = yaml.load(fs.readFileSync(`${__dirname}/../../spec.yaml`));
     const ajv = new Ajv({});
     Object.keys(spec.definitions).forEach((defName) => {
         ajv.addSchema(spec.definitions[defName], `#/definitions/${defName}`);

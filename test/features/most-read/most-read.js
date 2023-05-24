@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const parse = require('csv-parse/lib/sync');
+const parse = require('csv-parse/sync');
 const preq = require('preq');
 const assert = require('../../utils/assert');
 const server = require('../../utils/server');
@@ -10,7 +10,7 @@ const testUtil = require('../../utils/testUtil');
 const mostRead = require('../../../lib/most-read')
 
 const file = fs.readFileSync(path.resolve(__dirname, '../../../private/mainpages.csv'), 'utf8');
-const mainPageTitles = parse(file, 'utf8')[0];
+const mainPageTitles = parse.parse(file, 'utf8')[0];
 
 describe('most-read articles', function() {
 

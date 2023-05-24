@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 // Service entry point. Try node server --help for commandline options.

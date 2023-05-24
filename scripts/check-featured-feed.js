@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 const BBPromise = require('bluebird');
@@ -126,7 +124,7 @@ const getRssFeed = (projectLang, feature) => {
                     contentPool.push(entry.content);
                     indices.push(contentPool.length - 1);
                 }
-                languageCode = entry.link.substr(entry.link.lastIndexOf('/') + 1);
+                languageCode = entry.link.slice(entry.link.lastIndexOf('/') + 1);
             });
             // in a few instances the languageCode differs from the projectLang (Example: no/nb)
             console.log(`${projectLang}/${languageCode}: ${indices}: ${uri}`);
