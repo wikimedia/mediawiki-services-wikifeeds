@@ -4,7 +4,6 @@
 
 'use strict';
 
-const si = require('../lib/siteinfo');
 const util = require('../lib/util');
 const featured = require('../lib/featured-image');
 
@@ -24,17 +23,16 @@ let app;
  * ETag is set to the pageid and the revision.
  */
 router.get('/image/featured/:yyyy/:mm/:dd', (req, res) => {
-    return si.getSiteInfo(req)
-    .then((si) => featured.promise(app, req, si)
-    .then((response) => {
-        if (response.payload) {
-            util.setETag(res, response.meta && response.meta.tid);
-            util.setContentType(res, util.CONTENT_TYPES.unpublished);
-            res.status(200).json(response.payload);
-        } else {
-            res.status(204).end();
-        }
-    }));
+    return featured.promise(app, req)
+        .then((response) => {
+            if (response.payload) {
+                util.setETag(res, response.meta && response.meta.tid);
+                util.setContentType(res, util.CONTENT_TYPES.unpublished);
+                res.status(200).json(response.payload);
+            } else {
+                res.status(204).end();
+            }
+        });
 });
 
 module.exports = function (appObj) {
