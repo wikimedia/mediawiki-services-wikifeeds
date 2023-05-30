@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 
 info:
   version: 1.0.0
@@ -80,7 +80,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-monitor: false
 
   /:
@@ -97,7 +97,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: spec from root
           request:
@@ -121,7 +121,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: retrieve service info
           request: {}
@@ -145,16 +145,16 @@ paths:
         - application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Availability/1.0.1"
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
+        - $ref: "#/parameters/domain"
       responses:
         200:
           description: Availability of the feed content by wiki domain
           schema:
-            $ref: '#/definitions/availability'
+            $ref: "#/definitions/availability"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: Retrieve feed content availability from \'wikipedia.org\'
           request:
@@ -166,15 +166,15 @@ paths:
               content-type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Availability/1.0.1"
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
               x-frame-options: SAMEORIGIN
             body:
               todays_featured_article: [ /.+/ ]
-              most_read: [ '*' ]
-              picture_of_the_day: [ '*' ]
+              most_read: [ "*" ]
+              picture_of_the_day: [ "*" ]
               in_the_news: [ /.+/ ]
               on_this_day: [ /.+/ ]
 
@@ -191,16 +191,16 @@ paths:
         - application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Announcements/0.3.0"
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
+        - $ref: "#/parameters/domain"
       responses:
         200:
           description: Announcements for the given Wiki
           schema:
-            $ref: '#/definitions/announcements'
+            $ref: "#/definitions/announcements"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: Retrieve announcements
           response:
@@ -210,7 +210,7 @@ paths:
               cache-control: public, max-age=86400, s-maxage=900
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
@@ -235,7 +235,7 @@ paths:
         - application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/OnThisDay/0.3.3"
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
+        - $ref: "#/parameters/domain"
         - name: type
           in: path
           description: Type of events
@@ -248,26 +248,26 @@ paths:
             - holidays
             - events
             - all
-        - $ref: '#/parameters/month'
-        - $ref: '#/parameters/day'
+        - $ref: "#/parameters/month"
+        - $ref: "#/parameters/day"
 
       responses:
         200:
           description: Annual events listed on this wiki for the requested month and day
           schema:
-            $ref: '#/definitions/onthisdayResponse'
+            $ref: "#/definitions/onthisdayResponse"
         404:
           description: No data found for the requested date
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         501:
           description: Unsupported language
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: retrieve selected events on January 15
           request:
@@ -281,7 +281,7 @@ paths:
               content-type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/OnThisDay/0.3.3"
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
@@ -292,7 +292,6 @@ paths:
                   year: /.+/
                   pages:
                     - title: /.+/
-
 
   # from routes/feed/featured.js
   /{domain}/v1/page/featured/{year}/{month}/{day}:
@@ -306,41 +305,41 @@ paths:
         - application/json
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
-        - $ref: '#/parameters/year'
-        - $ref: '#/parameters/month'
-        - $ref: '#/parameters/day'
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/year"
+        - $ref: "#/parameters/month"
+        - $ref: "#/parameters/day"
       responses:
         200:
           description: The title of a Wikipedia's Featured Article of the Day
           schema:
-            $ref: '#/definitions/summary'
+            $ref: "#/definitions/summary"
         204:
           description: Empty response (for feed content aggregation requests from RESTBase)
           schema:
-            $ref: '#/definitions/empty'
+            $ref: "#/definitions/empty"
         404:
           description: Not found
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         500:
           description: API Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         501:
           description: Unsupported language
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: retrieve title of the featured article for April 29, 2016
           request:
             params:
               year: 2016
-              month: '04'
+              month: "04"
               day: 29
           response:
             status: 200
@@ -348,7 +347,7 @@ paths:
               content-type: application/json; charset=utf-8
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
@@ -361,13 +360,13 @@ paths:
             params:
               domain: is.wikipedia.org
               year: 2016
-              month: '04'
+              month: "04"
               day: 29
             query:
               aggregated: true
           response:
             status: 204
-            body: ''
+            body: ""
 
   # from routes/feed/featured-image.js
   /{domain}/v1/media/image/featured/{year}/{month}/{day}:
@@ -383,33 +382,33 @@ paths:
         - application/json
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
-        - $ref: '#/parameters/year'
-        - $ref: '#/parameters/month'
-        - $ref: '#/parameters/day'
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/year"
+        - $ref: "#/parameters/month"
+        - $ref: "#/parameters/day"
       responses:
         200:
           description: Info on the Commons Featured Image of the Day for the requested date
           schema:
-            $ref: '#/definitions/image'
+            $ref: "#/definitions/image"
         204:
           description: Empty response (for feed content aggregation requests from RESTBase)
           schema:
-            $ref: '#/definitions/empty'
+            $ref: "#/definitions/empty"
         404:
           description: Not found (no featured image for the requested date)
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: retrieve featured image data for April 29, 2016
           request:
             params:
               year: 2016
-              month: '04'
+              month: "04"
               day: 29
           response:
             status: 200
@@ -417,7 +416,7 @@ paths:
               content-type: application/json; charset=utf-8
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
@@ -465,47 +464,47 @@ paths:
         - application/json
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
-        - $ref: '#/parameters/year'
-        - $ref: '#/parameters/month'
-        - $ref: '#/parameters/day'
+        - $ref: "#/parameters/domain"
+        - $ref: "#/parameters/year"
+        - $ref: "#/parameters/month"
+        - $ref: "#/parameters/day"
       responses:
         200:
           description: Most read article titles for this wiki for the requested date
           schema:
-            $ref: '#/definitions/mostread'
+            $ref: "#/definitions/mostread"
         204:
           description: Empty response (for feed content aggregation requests from RESTBase)
           schema:
-            $ref: '#/definitions/empty'
+            $ref: "#/definitions/empty"
         404:
           description: No data found for the requested date
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: retrieve the most read articles for January 1, 2016
           request:
             params:
               year: 2016
-              month: '01'
-              day: '01'
+              month: "01"
+              day: "01"
           response:
             status: 200
             headers:
               content-type: application/json
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
               x-frame-options: SAMEORIGIN
             body:
-              date: '2016-01-01Z'
+              date: 2016-01-01Z
               articles:
                 - views: /.+/
                   rank: /.+/
@@ -515,8 +514,8 @@ paths:
           request:
             params:
               year: 2016
-              month: '01'
-              day: '01'
+              month: "01"
+              day: "01"
             query:
               aggregated: true
           response:
@@ -525,13 +524,13 @@ paths:
               content-type: application/json; charset=utf-8
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
               x-frame-options: SAMEORIGIN
             body:
-              date: '2015-12-31Z'
+              date: 2015-12-31Z
               articles:
                 - views: /.+/
                   rank: /.+/
@@ -541,13 +540,13 @@ paths:
           request:
             params:
               year: 2015
-              month: '01'
-              day: '01'
+              month: "01"
+              day: "01"
             query:
               aggregated: true
           response:
             status: 204
-            body: ''
+            body: ""
 
   # from routes/feed/news.js
   /{domain}/v1/page/news:
@@ -562,24 +561,24 @@ paths:
         - application/json
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
+        - $ref: "#/parameters/domain"
       responses:
         200:
           description: News content from the a Wikipedia main page
           schema:
-            $ref: '#/definitions/news'
+            $ref: "#/definitions/news"
         204:
           description: Empty response (for feed content aggregation requests from RESTBase)
           schema:
-            $ref: '#/definitions/empty'
+            $ref: "#/definitions/empty"
         501:
           description: Unsupported language
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         default:
           description: Error
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
       x-amples:
         - title: get 'In the News' content
           response:
@@ -588,7 +587,7 @@ paths:
               content-type: application/json; charset=utf-8
               vary: /.+/
               etag: /^"[^/"]+/[^/"]+"$/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
@@ -606,7 +605,7 @@ paths:
               aggregated: true
           response:
             status: 204
-            body: ''
+            body: ""
 
   # from routes/page/random.js
   /{domain}/v1/page/random/title:
@@ -621,16 +620,16 @@ paths:
         - application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Random/0.7.0"
         - application/problem+json
       parameters:
-        - $ref: '#/parameters/domain'
+        - $ref: "#/parameters/domain"
       responses:
         200:
           description: A random (good) article title
           schema:
-            $ref: '#/definitions/random'
+            $ref: "#/definitions/random"
         400:
           description: Bad request
           schema:
-            $ref: '#/definitions/problem'
+            $ref: "#/definitions/problem"
         default:
           $ref: "#/definitions/problem"
       x-amples:
@@ -640,7 +639,7 @@ paths:
             headers:
               content-type: application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Random/0.7.0"
               vary: /.+/
-              access-control-allow-origin: '*'
+              access-control-allow-origin: "*"
               access-control-allow-headers: accept, x-requested-with, content-type
               content-security-policy: default-src
               x-content-security-policy: default-src
@@ -697,7 +696,7 @@ definitions:
 
   mostread_article:
     allOf:
-      - $ref: '#/definitions/summary'
+      - $ref: "#/definitions/summary"
       - type: object
         properties:
           views:
@@ -706,7 +705,7 @@ definitions:
           view_history:
             type: array
             items:
-              $ref: '#/definitions/dated_pageview'
+              $ref: "#/definitions/dated_pageview"
           rank:
             type: integer
             description: Position in the list of most viewed articles
@@ -724,7 +723,7 @@ definitions:
         type: array
         description: Array of most popular articles
         items:
-          $ref: '#/definitions/mostread_article'
+          $ref: "#/definitions/mostread_article"
     required:
       - date
       - articles
@@ -744,7 +743,7 @@ definitions:
           type: array
           description: List of pages related to the event
           items:
-            $ref: '#/definitions/summary'
+            $ref: "#/definitions/summary"
     required:
       - text
       - pages
@@ -754,15 +753,15 @@ definitions:
     description: Lists of events which happened on the provided day and month
     properties:
       births:
-        $ref: '#/definitions/onthisdayList'
+        $ref: "#/definitions/onthisdayList"
       deaths:
-        $ref: '#/definitions/onthisdayList'
+        $ref: "#/definitions/onthisdayList"
       events:
-        $ref: '#/definitions/onthisdayList'
+        $ref: "#/definitions/onthisdayList"
       holidays:
-        $ref: '#/definitions/onthisdayList'
+        $ref: "#/definitions/onthisdayList"
       selected:
-        $ref: '#/definitions/onthisdayList'
+        $ref: "#/definitions/onthisdayList"
     additionalProperties: false
 
   news_item:
@@ -776,7 +775,7 @@ definitions:
         description: |
           A collection of pages mentioned in the headline. The first page is the headline topic.
         items:
-          $ref: '#/definitions/summary'
+          $ref: "#/definitions/summary"
     required:
       - story
       - links
@@ -784,7 +783,7 @@ definitions:
   news:
     type: array
     items:
-      $ref: '#/definitions/news_item'
+      $ref: "#/definitions/news_item"
 
   image:
     type: object
@@ -793,11 +792,11 @@ definitions:
         type: string
         description: Image title
       thumbnail:
-        $ref: '#/definitions/image_props'
+        $ref: "#/definitions/image_props"
       image:
-        $ref: '#/definitions/image_props'
+        $ref: "#/definitions/image_props"
       description:
-        $ref: '#/definitions/extmetadata_property'
+        $ref: "#/definitions/extmetadata_property"
       file_page:
         type: string
         description: Full URL to the file page for the item on Wikimedia Commons
@@ -817,7 +816,7 @@ definitions:
         required:
           - html
       credit:
-        $ref: '#/definitions/extmetadata_property'
+        $ref: "#/definitions/extmetadata_property"
       license:
         type: object
         description: license under which the media item is available on Wikimedia Commons
@@ -840,7 +839,7 @@ definitions:
           captions:
             type: object
             description: caption (label) values by language
-        required: [captions]
+        required: [ captions ]
     required:
       - title
       - thumbnail
@@ -855,7 +854,7 @@ definitions:
         type: array
         description: list of active announcements for this wiki
         items:
-          $ref: '#/definitions/announcement'
+          $ref: "#/definitions/announcement"
     required:
       - announce
 
@@ -933,7 +932,7 @@ definitions:
         type: string
         description: The URL of the image for the announcement
       action:
-        $ref: '#/definitions/action'
+        $ref: "#/definitions/action"
       caption_HTML:
         type: string
         description: HTML to display below the announcement. Usually a privacy statment and link to a policy
@@ -1069,7 +1068,7 @@ definitions:
       items:
         type: array
         items:
-          $ref: '#/definitions/article_title'
+          $ref: "#/definitions/article_title"
     required:
       - items
 
@@ -1124,7 +1123,7 @@ definitions:
           - no-extract
           - mainpage
       titles:
-        $ref: '#/definitions/titles_set'
+        $ref: "#/definitions/titles_set"
       title:
         deprecated: true
         type: string
@@ -1167,9 +1166,9 @@ definitions:
         type: string
         description: First several sentences of an article in simple HTML format
       thumbnail:
-        $ref: '#/definitions/image_props'
+        $ref: "#/definitions/image_props"
       originalimage:
-        $ref: '#/definitions/image_props'
+        $ref: "#/definitions/image_props"
       lang:
         type: string
         description: The page language code
@@ -1184,7 +1183,7 @@ definitions:
         type: string
         format: date-time
         description: The time when the page was last edited in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-        example: '1970-01-01T00:00:00.000Z'
+        example: "1970-01-01T00:00:00.000Z"
       description:
         type: string
         description: short description for the page
@@ -1193,9 +1192,9 @@ definitions:
         type: object
         properties:
           desktop:
-            $ref: '#/definitions/content_urls'
+            $ref: "#/definitions/content_urls"
           mobile:
-            $ref: '#/definitions/content_urls'
+            $ref: "#/definitions/content_urls"
       coordinates:
         type: object
         description: The coordinates of the item
@@ -1206,7 +1205,7 @@ definitions:
           lon:
             type: number
             description: The longitude
-        required: [ 'lat', 'lon' ]
+        required: [ lat, lon ]
     required:
       - type
       - titles
