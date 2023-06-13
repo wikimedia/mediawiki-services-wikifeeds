@@ -29,7 +29,7 @@ const isHistoric = (date) => {
 	return date < today;
 };
 
-const PARTS_URIS = {
+const FEATURED_FEED_PARTS = {
 	tfa: {
 		handler: async (a, req) => {
 			const internalRes = await featured.promise(a, req);
@@ -97,12 +97,12 @@ router.get(
 	'/featured/:yyyy(\\d{4})/:mm(\\d{2})/:dd(\\d{2})',
 	async (req, res) => {
 		const featuredProps = {};
-		let parts = Object.keys(PARTS_URIS);
+		let parts = Object.keys(FEATURED_FEED_PARTS);
 		if (isHistoric(parseDate(req))) {
-			parts = parts.filter((part) => PARTS_URIS[part].renewable);
+			parts = parts.filter((part) => FEATURED_FEED_PARTS[part].renewable);
 		}
 		parts.forEach((part) => {
-			const fragment = PARTS_URIS[part];
+			const fragment = FEATURED_FEED_PARTS[part];
 			req.query.aggregated = fragment.query.aggregated;
 			const reqClone = _.cloneDeep(req);
 			const internalRes = fragment.handler(app, reqClone).catch((err) => Object());
@@ -123,6 +123,77 @@ router.get(
 		});
 	}
 );
+
+const ONTHISDAY_FEED_PARTS = {
+	selected: {
+		handler: async (a, req) => {
+			const internalRes = await onThisDay.fetchAndRespond(
+				a, req, undefined,
+				onThisDay.selectedTitleForRequest,
+				onThisDay.selectionsInDoc,
+				false
+			);
+			return internalRes.selected;
+		}
+	},
+	births: {
+		handler: async (a, req) => {
+			const internalRes = await onThisDay.fetchAndRespond(
+				a, req, undefined,
+				onThisDay.dayTitleForRequest,
+				onThisDay.birthsInDoc,
+				false
+			);
+			return internalRes.births;
+		}
+	},
+	deaths: {
+		handler: async (a, req) => {
+			const internalRes = await onThisDay.fetchAndRespond(
+				a, req, undefined,
+				onThisDay.dayTitleForRequest,
+				onThisDay.deathsInDoc,
+				false
+			);
+			return internalRes.deaths;
+		}
+	},
+	events: {
+		handler: async (a, req) => {
+			const internalRes = await onThisDay.fetchAndRespond(
+				a, req, undefined,
+				onThisDay.dayTitleForRequest,
+				onThisDay.eventsInDoc,
+				false
+			);
+			return internalRes.events;
+		}
+	},
+	holidays: {
+		handler: async (a, req) => {
+			const internalRes = await onThisDay.fetchAndRespond(
+				a, req, undefined,
+				onThisDay.dayTitleForRequest,
+				onThisDay.holidaysInDoc,
+				false
+			);
+			return internalRes.holidays;
+		}
+	}
+};
+
+router.get('/onthisday/all/:mm(\\d{2})/:dd(\\d{2})', async (req, res) => {
+	const onthisdayProps = {};
+	const parts = Object.keys(ONTHISDAY_FEED_PARTS);
+	parts.forEach((part) => {
+		const fragment = ONTHISDAY_FEED_PARTS[part];
+		const reqClone = _.cloneDeep(req);
+		const internalRes = fragment.handler(app, reqClone).catch((err) => Object());
+		onthisdayProps[part] = internalRes;
+	});
+
+	return P.props(onthisdayProps).then((result) => res.json(result));
+});
 
 module.exports = function (appObj) {
 	app = appObj;
