@@ -30,6 +30,31 @@ router.get('/random/title', (req, res) => {
     });
 });
 
+const RANDOM_FORMATS = [
+    'title',
+    'html',
+    'summary',
+    'related',
+    'mobile-sections',
+    'mobile-sections-lead'
+];
+const RANDOM_FORMAT_REGEX = RANDOM_FORMATS.join('|');
+
+/**
+ * GET {domain}/v1/page/random/{format}
+ * Returns a redirect to a single random result well suited to card-type layouts, i.e.
+ * one likely to have an image url, text extract and wikidata description.
+ *
+ * The redirect will be based on the format requested and point to /page/{format} rest endpoints.
+ */
+router.get(`/random/:format(${RANDOM_FORMAT_REGEX})`, async (req, res) => {
+    const title = await lib.promise(req);
+    const format = req.params.format;
+    const domain = req.params.domain;
+    const randomURI = `https://${domain}/api/rest_v1/page/${format}/${title}`;
+    res.redirect(303, randomURI);
+});
+
 module.exports = function () {
     return {
         path: '/page',
