@@ -18,7 +18,7 @@ describe('random/title', function () {
 
     it('redirects to the right format with random title - html', function () {
         const domain = 'en.wikipedia.org';
-        const path = '/v1/page/random/html';
+        const path = '/v1/page/random/redirect/html';
         const uri = `${server.config.uri}${domain}${path}`;
         return preq.get({ uri, followRedirect: false }).then((res) => {
             const expectedPath = 'https://en.wikipedia.org/api/rest_v1/page/html/';
@@ -29,7 +29,7 @@ describe('random/title', function () {
 
     it('redirects to the right format with random title - invalid format', function () {
         const domain = 'en.wikipedia.org';
-        const path = '/v1/page/random/invalid-format';
+        const path = '/v1/page/random/redirect/invalid-format';
         const uri = `${server.config.uri}${domain}${path}`;
         return preq.get({ uri, followRedirect: false }).catch((res) => {
             assert.status(res, '404');

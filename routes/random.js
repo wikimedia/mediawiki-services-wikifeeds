@@ -41,13 +41,13 @@ const RANDOM_FORMATS = [
 const RANDOM_FORMAT_REGEX = RANDOM_FORMATS.join('|');
 
 /**
- * GET {domain}/v1/page/random/{format}
+ * GET {domain}/v1/page/random/redirect/{format}
  * Returns a redirect to a single random result well suited to card-type layouts, i.e.
  * one likely to have an image url, text extract and wikidata description.
  *
  * The redirect will be based on the format requested and point to /page/{format} rest endpoints.
  */
-router.get(`/random/:format(${RANDOM_FORMAT_REGEX})`, async (req, res) => {
+router.get(`/random/redirect/:format(${RANDOM_FORMAT_REGEX})`, async (req, res) => {
     const title = await lib.promise(req);
     const format = req.params.format;
     const domain = req.params.domain;
