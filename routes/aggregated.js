@@ -188,8 +188,7 @@ router.get('/onthisday/all/:mm(\\d{2})/:dd(\\d{2})', async (req, res) => {
 	parts.forEach((part) => {
 		const fragment = ONTHISDAY_FEED_PARTS[part];
 		const reqClone = _.cloneDeep(req);
-		// For debugging purposes: Disable catching error and returning default empty object
-		const internalRes = fragment.handler(app, reqClone);
+		const internalRes = fragment.handler(app, reqClone).catch((err) => Object());
 		onthisdayProps[part] = internalRes;
 	});
 
