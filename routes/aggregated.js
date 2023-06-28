@@ -105,6 +105,7 @@ router.get(
 			const fragment = FEATURED_FEED_PARTS[part];
 			req.query.aggregated = fragment.query.aggregated;
 			const reqClone = _.cloneDeep(req);
+			util.initAndLogRequest(reqClone, app);
 			const internalRes = fragment.handler(app, reqClone).catch((err) => Object());
 			featuredProps[part] = internalRes;
 		});
@@ -188,6 +189,7 @@ router.get('/onthisday/all/:mm(\\d{2})/:dd(\\d{2})', async (req, res) => {
 	parts.forEach((part) => {
 		const fragment = ONTHISDAY_FEED_PARTS[part];
 		const reqClone = _.cloneDeep(req);
+		util.initAndLogRequest(reqClone, app);
 		const internalRes = fragment.handler(app, reqClone).catch((err) => Object());
 		onthisdayProps[part] = internalRes;
 	});
