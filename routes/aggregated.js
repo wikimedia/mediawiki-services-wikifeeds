@@ -9,6 +9,7 @@ const mostRead = require('../lib/most-read');
 const featuredImage = require('../lib/featured-image');
 const news = require('../lib/news');
 const onThisDay = require('../lib/on-this-day');
+const uuidv1 = require('uuid').v1;
 
 /**
  * The main router object
@@ -122,6 +123,7 @@ router.get(
 			});
 			const profile = 'https://www.mediawiki.org/wiki/Specs/aggregated-feed/0.5.0';
 			const contentType = `application/json; charset=utf-8; profile="${profile}"`;
+			res.set('etag', uuidv1());
 			res.set('content-type', contentType);
 			res.json(body);
 		});
@@ -200,6 +202,7 @@ router.get('/onthisday/all/:mm(\\d{2})/:dd(\\d{2})', async (req, res) => {
 	return P.props(onthisdayProps).then((result) => {
 		const profile = 'https://www.mediawiki.org/wiki/Specs/onthisday-feed/0.5.0';
 		const contentType = `application/json; charset=utf-8; profile="${profile}"`;
+		res.set('etag', uuidv1());
 		res.set('content-type', contentType);
 		res.json(result);
 	});
