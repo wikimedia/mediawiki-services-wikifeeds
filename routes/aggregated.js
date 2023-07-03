@@ -124,6 +124,7 @@ router.get(
 			const profile = 'https://www.mediawiki.org/wiki/Specs/aggregated-feed/0.5.0';
 			const contentType = `application/json; charset=utf-8; profile="${profile}"`;
 			res.set('etag', uuidv1());
+			res.set('cache-control', 's-maxage=300, max-age=60');
 			res.set('content-type', contentType);
 			res.json(body);
 		});
@@ -204,6 +205,7 @@ router.get('/onthisday/all/:mm(\\d{2})/:dd(\\d{2})', async (req, res) => {
 		const contentType = `application/json; charset=utf-8; profile="${profile}"`;
 		res.set('etag', uuidv1());
 		res.set('content-type', contentType);
+		res.set('cache-control', 's-maxage=300, max-age=60');
 		res.json(result);
 	});
 });
