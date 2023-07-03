@@ -120,6 +120,9 @@ router.get(
 					}
 				}
 			});
+			const profile = 'https://www.mediawiki.org/wiki/Specs/aggregated-feed/0.5.0';
+			const contentType = `application/json; charset=utf-8; profile="${profile}"`;
+			res.set('content-type', contentType);
 			res.json(body);
 		});
 	}
@@ -194,7 +197,12 @@ router.get('/onthisday/all/:mm(\\d{2})/:dd(\\d{2})', async (req, res) => {
 		onthisdayProps[part] = internalRes;
 	});
 
-	return P.props(onthisdayProps).then((result) => res.json(result));
+	return P.props(onthisdayProps).then((result) => {
+		const profile = 'https://www.mediawiki.org/wiki/Specs/onthisday-feed/0.5.0';
+		const contentType = `application/json; charset=utf-8; profile="${profile}"`;
+		res.set('content-type', contentType);
+		res.json(result);
+	});
 });
 
 module.exports = function (appObj) {
