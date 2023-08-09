@@ -52,6 +52,7 @@ router.get(`/random/redirect/:format(${RANDOM_FORMAT_REGEX})`, async (req, res) 
     const format = req.params.format;
     const domain = req.params.domain;
     const randomURI = `https://${domain}/api/rest_v1/page/${format}/${title}`;
+    res.set('cache-control', 'private, max-age=0, s-maxage=0, must-revalidate');
     res.redirect(303, randomURI);
 });
 

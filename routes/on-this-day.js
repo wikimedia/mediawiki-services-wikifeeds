@@ -6,6 +6,8 @@ const lib = require('../lib/on-this-day');
 
 let app;
 
+const DEFAULT_CACHE_CONTROL = 's-maxage=300, max-age=60';
+
 /**
  * ENDPOINT for 'births' from 'Births' section of 'day' pages like:
  * https://en.m.wikipedia.org/wiki/May_20 Example:
@@ -13,6 +15,7 @@ let app;
  * GET {domain}/v1/feed/onthisday/births/{month}/{day}
  */
 router.get('/births/:mm/:dd', (req, res) => {
+    res.set('cache-control', DEFAULT_CACHE_CONTROL);
     return lib.fetchAndRespond(app, req, res, lib.dayTitleForRequest, lib.birthsInDoc);
 });
 
@@ -23,6 +26,7 @@ router.get('/births/:mm/:dd', (req, res) => {
  * GET {domain}/v1/feed/onthisday/deaths/{month}/{day}
  */
 router.get('/deaths/:mm/:dd', (req, res) => {
+    res.set('cache-control', DEFAULT_CACHE_CONTROL);
     return lib.fetchAndRespond(app, req, res, lib.dayTitleForRequest, lib.deathsInDoc);
 });
 
@@ -33,6 +37,7 @@ router.get('/deaths/:mm/:dd', (req, res) => {
  * GET {domain}/v1/feed/onthisday/events/{month}/{day}
  */
 router.get('/events/:mm/:dd', (req, res) => {
+    res.set('cache-control', DEFAULT_CACHE_CONTROL);
     return lib.fetchAndRespond(app, req, res, lib.dayTitleForRequest, lib.eventsInDoc);
 });
 
@@ -43,6 +48,7 @@ router.get('/events/:mm/:dd', (req, res) => {
  * GET {domain}/v1/feed/onthisday/holidays/{month}/{day}
  */
 router.get('/holidays/:mm/:dd', (req, res) => {
+    res.set('cache-control', DEFAULT_CACHE_CONTROL);
     return lib.fetchAndRespond(app, req, res, lib.dayTitleForRequest, lib.holidaysInDoc);
 });
 
@@ -53,6 +59,7 @@ router.get('/holidays/:mm/:dd', (req, res) => {
  * GET {domain}/v1/feed/onthisday/selected/{month}/{day}
  */
 router.get('/selected/:mm/:dd', (req, res) => {
+    res.set('cache-control', DEFAULT_CACHE_CONTROL);
     return lib.fetchAndRespond(app, req, res, lib.selectedTitleForRequest, lib.selectionsInDoc);
 });
 

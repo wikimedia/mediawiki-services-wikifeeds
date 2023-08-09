@@ -22,6 +22,7 @@ router.get('/availability', (req, res) => {
     res.status(200);
     util.setETag(res, util.hashCode(JSON.stringify(response)));
     util.setContentType(res, util.CONTENT_TYPES.availability);
+    res.set('cache-control', 'private, max-age=0, s-maxage=0, must-revalidate');
     res.json(response).end();
 });
 
