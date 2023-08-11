@@ -27,6 +27,25 @@ const Platform = {
 const campaigns = [
     {
         type: AnnouncementType.FUNDRAISING,
+        startTime: '2023-08-22T00:00:00Z',
+        endTime: '2023-09-19T23:59:00Z',
+        idPrefix: 'INDIAFUNDRAISING23',
+        domain: 'en.wikipedia.org',
+        activeWikis: [
+            'en.wikipedia.org'
+        ],
+        countryVars: {
+            in: {
+                country: 'India',
+                currency: '₹',
+                coffee: 75,
+                border: true,
+                placement: 'article'
+            }
+        }
+    },
+    {
+        type: AnnouncementType.FUNDRAISING,
         startTime: '2022-05-31T00:00:00Z',
         endTime: '2022-06-28T23:59:00Z',
         idPrefix: 'INDIAFUNDRAISING22',
