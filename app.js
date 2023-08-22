@@ -175,6 +175,15 @@ function loadRoutes(app, dir) {
             // wrap the route handlers with Promise.try() blocks
             sUtil.wrapRouteHandlers(route, app);
             // all good, use that route
+
+            // HACK: return 404 for yue.wikipedia.org domain
+            app.use((req, res, next) => {
+                if (req.url.startsWith('/yue.wikipedia.org/')) {
+                    res.status(404).end('Domain not found');
+                    return;
+                }
+                next();
+            });
             app.use(route.path, route.router);
         });
     }).then(() => {

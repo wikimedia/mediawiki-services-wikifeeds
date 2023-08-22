@@ -36,12 +36,12 @@ describe('random/title', function () {
         })
     });
 
-    it('redirects to the right format when domain is configured to be redirected', () => {
+    it('returns 404 for yue.wikipedia.org', () => {
         const domain = 'yue.wikipedia.org';
         const path = '/v1/page/random/redirect/title';
         const uri = `${server.config.uri}${domain}${path}`;
         return preq.get({ uri, followRedirect: false }).catch((res) => {
-            assert.status(res, '303');
+            assert.status(res, '404');
         })
     });
 
