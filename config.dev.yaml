@@ -91,3 +91,4 @@ services:
           accept-language: "{{accept-language}}"
       # whether to print extra debug info
       debug: true
+      usecorepagehtml: true
