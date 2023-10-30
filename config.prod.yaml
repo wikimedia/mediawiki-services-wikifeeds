@@ -79,6 +79,18 @@ services:
         query: "{{ default(request.query, {}) }}"
         headers: "{{request.headers}}"
         body: "{{request.body}}"
+
+      # the template used for contacting the REST Gateway
+      rest_gateway_req:
+        method: "{{request.method}}"
+
+        # Per https://gerrit.wikimedia.org/r/plugins/gitiles/operations/deployment-charts/+/refs/heads/master/helmfile.d/services/rest-gateway/values.yaml#57
+        uri: https://rest-gateway.discovery.wmnet:4113/{{domain}}/v1/{+path}
+
+        query: "{{ default(request.query, {}) }}"
+        headers: "{{request.headers}}"
+        body: "{{request.body}}"
+
       # the template used for requesting a page from a MediaWiki appserver
       mw_req:
         method: get

@@ -80,6 +80,15 @@ services:
         query: "{{ default(request.query, {}) }}"
         headers: "{{request.headers}}"
         body: "{{request.body}}"
+
+      # the template used for contacting the REST Gateway
+      rest_gateway_req:
+        method: "{{request.method}}"
+        uri: https://{{domain}}/api/rest_v1/{+path}
+        query: "{{ default(request.query, {}) }}"
+        headers: "{{request.headers}}"
+        body: "{{request.body}}"
+
       # the template used for requesting a page from a MediaWiki appserver
       mw_req:
         method: get
