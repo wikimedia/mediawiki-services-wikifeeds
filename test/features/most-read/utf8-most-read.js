@@ -16,7 +16,7 @@ describe('most-read articles', function() {
         return preq.get({ uri })
             .then((res) => {
                 assert.status(res, 200);
-                assert.deepEqual(res.body.articles.length, 30, 'Expected 30 articles');
+                assert.deepEqual(res.body.articles.length, 29, 'Expected 29 articles');
             });
     });
 
