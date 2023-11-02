@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "A node webservice supporting featured wiki content feeds",
 	"main": "./app.js",
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"scripts": {
 		"start": "service-runner",
 		"test": "npm run lint && PREQ_CONNECT_TIMEOUT=15 mocha --recursive",
@@ -36,6 +39,8 @@
 	},
 	"homepage": "https://phabricator.wikimedia.org/tag/wikifeeds",
 	"dependencies": {
+		"axios": "^1.6.0",
+		"axios-retry": "^3.8.1",
 		"bluebird": "^3.7.2",
 		"body-parser": "^1.20.2",
 		"bunyan": "^1.8.15",
@@ -64,6 +69,7 @@
 		"mocha.parallel": "^0.15.6",
 		"nock": "^13.3.1",
 		"nyc": "^15.1.0",
-		"pre-commit": "^1.2.2"
+		"pre-commit": "^1.2.2",
+		"sinon": "^17.0.1"
 	}
 }
