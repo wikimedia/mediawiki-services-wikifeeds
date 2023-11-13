@@ -84,9 +84,9 @@ const campaigns = [
     },
     {
         type: AnnouncementType.FUNDRAISING,
-        startTime: '2022-11-29T00:00:00Z',
-        endTime: '2022-12-31T23:59:00Z',
-        idPrefix: 'FUNDRAISING22',
+        startTime: '2023-11-28T16:00:00Z',
+        endTime: '2024-01-01T00:00:00Z',
+        idPrefix: 'FUNDRAISING23',
         domain: 'en.wikipedia.org',
         activeWikis: [
             'en.wikipedia.org'
@@ -95,7 +95,7 @@ const campaigns = [
             us: {
                 country: 'the U.S.',
                 currency: '$',
-                coffee: 2,
+                coffee: 3,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Icons-cc-us.png'
@@ -111,7 +111,7 @@ const campaigns = [
             au: {
                 country: 'Australia',
                 currency: '$',
-                coffee: 2,
+                coffee: 3,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/6/6f/Icons-cc-gb-ie-au.png'
@@ -119,7 +119,7 @@ const campaigns = [
             ca: {
                 country: 'Canada',
                 currency: '$',
-                coffee: 2,
+                coffee: 3,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/4/4d/Icons-cc-nz-ca.png'
@@ -127,7 +127,7 @@ const campaigns = [
             nz: {
                 country: 'New Zealand',
                 currency: '$',
-                coffee: 2,
+                coffee: 3,
                 border: true,
                 placement: 'article',
                 imageUrl: 'https://upload.wikimedia.org/wikipedia/donate/4/4d/Icons-cc-nz-ca.png'
