@@ -70,7 +70,8 @@ describe('most-read articles', function() {
 
     it('Should filter out blocked titles from some languages, but not others', () => {
         assert.ok(mostRead.isBlocked('es', 'Cleopatra'))
-        assert.ok(!mostRead.isBlocked('en', 'Cleopatra'))
+        assert.ok(mostRead.isBlocked('test', 'User:JGiannelos_(WMF)/test_most_read_block'))
+        assert.ok(!mostRead.isBlocked('en', 'User:JGiannelos_(WMF)/test_most_read_block'))
     });
 
     it('Should filter out certain blocked titles from all wikis', () => {
