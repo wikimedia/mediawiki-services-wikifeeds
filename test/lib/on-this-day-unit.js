@@ -72,7 +72,8 @@ const TEMPLE_EVENT_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[2];
 const GANDHI_DEATH_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[3];
 const MARTYRDOM_HOLIDAY_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[4];
 const NON_EVENT_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[5];
-const ZHWIKI_FOUNDING_OF_ROME_DIV_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[9];
+const TURKISH_BIRTH_LIST_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[9]
+const ZHWIKI_FOUNDING_OF_ROME_DIV_ELEMENT = MOCK_EVENT_LIST_ELEMENTS[10];
 
 // TESTS
 
@@ -227,6 +228,20 @@ describe('onthisday-unit', () => {
                 }
             );
         });
+        it('from a birth list element', () => {
+            assert.deepEqual(
+                onThisDay.wmfEventFromListElement(TURKISH_BIRTH_LIST_ELEMENT, false, 'tr'),
+                {
+                    text: 'Caner Büke, Türk millî tekvandocu',
+                    pages: [
+                        {
+                            title: '/wiki/Caner_B%C3%BCke'
+                        }
+                    ],
+                    year: 1987
+                }
+            );
+        });
         it('from a selected div element on zhwiki', () => {
             assert.deepEqual(
                 onThisDay.wmfEventFromListElement(ZHWIKI_FOUNDING_OF_ROME_DIV_ELEMENT, true, 'zh'),
@@ -297,7 +312,7 @@ describe('onthisday-unit', () => {
 
     it('eventsForYearListElements returns a WMFEvent for only year list elements', () => {
         assert.deepEqual(
-            onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, false, 'en').length, 4,
+            onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, false, 'en').length, 5,
             'Should return WMFEvent for each of 4 year list elements'
         );
     });
@@ -375,10 +390,11 @@ describe('onthisday-unit', () => {
         const sortedEvents =
             onThisDay.eventsForYearListElements(MOCK_EVENT_LIST_ELEMENTS, false, 'en')
         .sort(onThisDay.reverseChronologicalWMFEventComparator);
-        assert.deepEqual(sortedEvents[0].year, 1948);
-        assert.deepEqual(sortedEvents[1].year, 1946);
-        assert.deepEqual(sortedEvents[2].year, -58);
-        assert.deepEqual(sortedEvents[3].year, -516);
+        assert.deepEqual(sortedEvents[0].year, 1987);
+        assert.deepEqual(sortedEvents[1].year, 1948);
+        assert.deepEqual(sortedEvents[2].year, 1946);
+        assert.deepEqual(sortedEvents[3].year, -58);
+        assert.deepEqual(sortedEvents[4].year, -516);
     });
 
     describe('listElementsByHeadingID extracts expected number of births from', () => {
