@@ -111,6 +111,14 @@ describe('lib:announcements:etc', () => {
                     // eslint-disable-next-line max-len
                     `V2 announcements should have some HTML line breaks in the "${textOnlyFieldName}" field`
                 );
+
+                // Ensure that template variables are expanded
+                const pattern = /.*(?<exp>\${.*}).*/g;
+                if (v2Announcement.text.match(pattern)) {
+                    assert.ok(
+                        element.innerHTML.match(pattern) === null
+                    )
+                }
             }
         });
 
