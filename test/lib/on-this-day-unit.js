@@ -667,4 +667,30 @@ describe('onthisday-unit', () => {
             assert.deepEqual(event.pages[0].title, 'Dog');
         });
     });
+
+    describe('style tags should be dropped', () => {
+        it('exclude style tags', () => {
+            const test = domino.createDocument(`
+                <ul>
+                  <li id='thisLI'>
+                    1999 - <span>some stuff</span><style>.mw-parser-output .frac{white-space:nowrap}</style><span>happens</span>
+                  </li>
+                  <li id='thatLI'>
+                    2000 - <span>more stuff</span><style>.mw-parser-output .frac{white-space:nowrap}</style><span>happens</span>
+                  </li>
+                </ul>
+              `)
+              const LI = test.querySelector('#thisLI');
+              onThisDay.addPrefixFromAncestorListElementsToListElement(LI, 'en');
+              assert.deepEqual(
+                  LI.textContent, '1999 - some stuffhappens'
+              );
+              const LI2 = test.querySelector('#thatLI');
+              onThisDay.addPrefixFromAncestorListElementsToListElement(LI2, 'en');
+              assert.deepEqual(
+                  LI2.textContent, '2000 - more stuffhappens'
+              );
+        });
+    });
+
 });
