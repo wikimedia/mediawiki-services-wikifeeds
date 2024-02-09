@@ -1,6 +1,6 @@
 # syntax=docker-registry.wikimedia.org/repos/releng/blubber:v0.12.1
 version: v4
-base: docker-registry.wikimedia.org/nodejs16-slim
+base: docker-registry.wikimedia.org/nodejs18-slim
 lives:
   in: /srv/service
 runs:
