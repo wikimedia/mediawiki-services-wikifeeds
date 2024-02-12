@@ -30,9 +30,8 @@
 		"array-bracket-spacing": "off",
 		"array-callback-return": "warn",
 		"default-param-last": "warn",
-		"no-process-exit": "warn",
+		"n/no-process-exit": "warn",
 		"no-shadow": "warn",
-		"node/no-missing-require": "warn",
 		"strict": "warn"
 	}
 }

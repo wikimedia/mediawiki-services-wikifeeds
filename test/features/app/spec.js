@@ -13,6 +13,7 @@ const fs     = require('fs');
 const dateUtil = require('../../../lib/date-util');
 const pad = dateUtil.pad;
 const Ajv = require('ajv');
+const addFormats= require('ajv-formats');
 
 const baseUri = `${server.config.uri}en.wikipedia.org/v1/`;
 const d1 = new Date();
@@ -289,6 +290,8 @@ describe('Swagger spec', function() {
 
     describe('validate responses against schema', () => {
         const ajv = new Ajv({});
+        addFormats(ajv, { formats: ['date-time'] });
+        ajv.addKeyword( { keyword: "example", type: "string" } );
 
         const assertValidSchema = (uri, schemaPath) => {
             return preq.get({ uri })

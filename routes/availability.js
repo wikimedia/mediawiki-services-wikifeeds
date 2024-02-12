@@ -8,7 +8,7 @@ const onThisDayLangs = Object.keys(require('../lib/on-this-day.languages').langu
 const router = util.router();
 
 function langCodesToWikipediaDomains(langCodes) {
-    return langCodes.map((lang) => `${lang}.wikipedia.org`);
+    return langCodes.map((lang) => `${ lang }.wikipedia.org`);
 }
 
 router.get('/availability', (req, res) => {

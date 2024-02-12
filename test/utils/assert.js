@@ -7,6 +7,7 @@ const assert = require('assert');
 const _ = require('lodash');
 const yaml = require('js-yaml');
 const Ajv = require('ajv');
+const addFormats= require('ajv-formats');
 const fs = require('fs');
 
 let summaryValidator;
@@ -16,6 +17,9 @@ function getSummaryValidator() {
     }
     const spec = yaml.load(fs.readFileSync(`${__dirname}/../../spec.yaml`));
     const ajv = new Ajv({});
+    addFormats(ajv, { formats: ['date-time'] });
+    ajv.addKeyword( { keyword: "example", type: "string" } );
+
     Object.keys(spec.definitions).forEach((defName) => {
         ajv.addSchema(spec.definitions[defName], `#/definitions/${defName}`);
     });

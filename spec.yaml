@@ -744,9 +744,9 @@ definitions:
           description: List of pages related to the event
           items:
             $ref: "#/definitions/summary"
-    required:
-      - text
-      - pages
+      required:
+        - text
+        - pages
 
   onthisdayResponse:
     type: object
@@ -1035,6 +1035,7 @@ definitions:
     additionalProperties: false
 
   extmetadata_property:
+    type: object
     properties:
       html:
         type: string

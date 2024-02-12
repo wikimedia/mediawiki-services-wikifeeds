@@ -47,11 +47,11 @@ const RANDOM_FORMAT_REGEX = RANDOM_FORMATS.join('|');
  *
  * The redirect will be based on the format requested and point to /page/{format} rest endpoints.
  */
-router.get(`/random/redirect/:format(${RANDOM_FORMAT_REGEX})`, async (req, res) => {
+router.get(`/random/redirect/:format(${ RANDOM_FORMAT_REGEX })`, async (req, res) => {
     const title = await lib.promise(req);
     const format = req.params.format;
     const domain = req.params.domain;
-    const randomURI = `https://${domain}/api/rest_v1/page/${format}/${title}`;
+    const randomURI = `https://${ domain }/api/rest_v1/page/${ format }/${ title }`;
     res.set('cache-control', 'private, max-age=0, s-maxage=0, must-revalidate');
     res.redirect(303, randomURI);
 });

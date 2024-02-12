@@ -38,19 +38,19 @@ const lookForBoldAnchor = (document, projectLang, html) => {
     const boldAnchor = document.querySelector('b > a, a > b');
     if (boldAnchor) {
         const tfaTitle = boldAnchor.getAttribute('title');
-        console.log(`${projectLang}: ${tfaTitle}`);
+        console.log(`${ projectLang }: ${ tfaTitle }`);
         candidates.push(projectLang);
     } else {
-        console.log(`${projectLang}: ERROR: bold anchor not found: else: ${html}`);
+        console.log(`${ projectLang }: ERROR: bold anchor not found: else: ${ html }`);
         errElse.push(projectLang);
     }
 };
 
 const getWikitext = (projectLang, feature) => {
-    const baseUri = `https://${projectLang}.${feature.projectFamily}.org`;
+    const baseUri = `https://${ projectLang }.${ feature.projectFamily }.org`;
     const queryParams1 = 'action=query&format=json&prop=revisions&rvprop=content';
-    const queryParams2 = `&rvslots=main&titles=MediaWiki%3A${feature.title}`;
-    const uri = `${baseUri}/w/api.php?${queryParams1}${queryParams2}`;
+    const queryParams2 = `&rvslots=main&titles=MediaWiki%3A${ feature.title }`;
+    const uri = `${ baseUri }/w/api.php?${ queryParams1 }${ queryParams2 }`;
 
     return preq.get({ uri })
         .then((rsp) => {
@@ -67,24 +67,24 @@ const getWikitext = (projectLang, feature) => {
 
             const wikiText = pages[firstPageKey].revisions[0].slots.main['*'];
             if (wikiText) {
-                console.log(`${projectLang}: ${wikiText}`);
+                console.log(`${ projectLang }: ${ wikiText }`);
                 candidates.push(projectLang);
             } else {
                 errNotConfigured.push(projectLang);
             }
         })
         .catch((err) => {
-            console.log(`${projectLang} ERROR: ${err}`);
+            console.log(`${ projectLang } ERROR: ${ err }`);
             errHttp.push(projectLang);
         });
 };
 
 const doubleExpandTemplate = (projectLang, feature) => {
-    const baseUri = `https://${projectLang}.${feature.projectFamily}.org`;
+    const baseUri = `https://${ projectLang }.${ feature.projectFamily }.org`;
     const wikiText = encodeURIComponent(
-        `{{#ifexist:{{int:${feature.title}}}|{{ {{int:${feature.title}}} }} }}`);
-    const queryParams = `action=parse&format=json&prop=text&contentmodel=wikitext&text=${wikiText}`;
-    const uri = `${baseUri}/w/api.php?${queryParams}`;
+        `{{#ifexist:{{int:${ feature.title }}}|{{ {{int:${ feature.title }}} }} }}`);
+    const queryParams = `action=parse&format=json&prop=text&contentmodel=wikitext&text=${ wikiText }`;
+    const uri = `${ baseUri }/w/api.php?${ queryParams }`;
 
     return preq.get({ uri })
         .then((rsp) => {
@@ -94,20 +94,20 @@ const doubleExpandTemplate = (projectLang, feature) => {
             } else if (feature.shouldLookForBoldAnchor) {
                 lookForBoldAnchor(domino.createDocument(html), projectLang, html);
             } else {
-                console.log(`${projectLang}: ${html}`);
+                console.log(`${ projectLang }: ${ html }`);
                 candidates.push(projectLang);
             }
         })
         .catch((err) => {
-            console.log(`${projectLang} ERROR: ${err}`);
+            console.log(`${ projectLang } ERROR: ${ err }`);
             errHttp.push(projectLang);
         });
 };
 
 const getRssFeed = (projectLang, feature) => {
-    const baseUri = `https://${projectLang}.${feature.projectFamily}.org`;
-    const queryParams = `action=featuredfeed&feed=${feature.feedName}&feedformat=rss`;
-    const uri = `${baseUri}/w/api.php?${queryParams}`;
+    const baseUri = `https://${ projectLang }.${ feature.projectFamily }.org`;
+    const queryParams = `action=featuredfeed&feed=${ feature.feedName }&feedformat=rss`;
+    const uri = `${ baseUri }/w/api.php?${ queryParams }`;
     const contentPool = [];
     const indices = [];
 
@@ -127,24 +127,24 @@ const getRssFeed = (projectLang, feature) => {
                 languageCode = entry.link.slice(entry.link.lastIndexOf('/') + 1);
             });
             // in a few instances the languageCode differs from the projectLang (Example: no/nb)
-            console.log(`${projectLang}/${languageCode}: ${indices}: ${uri}`);
+            console.log(`${ projectLang }/${ languageCode }: ${ indices }: ${ uri }`);
             candidates.push(projectLang);
         })
         .catch((err) => {
             if (err.message === 'RSS 1.0 parsing not yet implemented.') {
                 errNotConfigured.push(projectLang);
             } else {
-                console.log(`${projectLang}: ERROR: ${uri}: ${err}`);
+                console.log(`${ projectLang }: ERROR: ${ uri }: ${ err }`);
                 errHttp.push(projectLang);
             }
         });
 };
 
 const printResultSummary = () => {
-    console.log(`candidates: ${candidates.length}: ${JSON.stringify(candidates.sort())}`);
-    console.log(`errNotConfigured: ${errNotConfigured.length}: ${errNotConfigured.sort()}`);
-    console.log(`errElse: ${errElse.length}: ${errElse.sort()}`);
-    console.log(`retryQueue: ${errHttp.length}: ${errHttp.sort()}`);
+    console.log(`candidates: ${ candidates.length }: ${ JSON.stringify(candidates.sort()) }`);
+    console.log(`errNotConfigured: ${ errNotConfigured.length }: ${ errNotConfigured.sort() }`);
+    console.log(`errElse: ${ errElse.length }: ${ errElse.sort() }`);
+    console.log(`retryQueue: ${ errHttp.length }: ${ errHttp.sort() }`);
 };
 
 const processAllLanguages = (feature) => {
@@ -213,6 +213,6 @@ const feature = featureMap[process.argv[2]];
 if (feature) {
     processAllLanguages(feature);
 } else {
-    console.error(`Error: need to specify one of ${Object.keys(featureMap)}!`);
+    console.error(`Error: need to specify one of ${ Object.keys(featureMap) }!`);
     process.exit(-1);
 }
