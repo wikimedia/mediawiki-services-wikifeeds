@@ -12,7 +12,7 @@
 		"test:unit": "mocha test/lib",
 		"test:diff": "mocha --exit test/diff",
 		"test:spec": "mocha test/features/app/spec.js",
-		"lint": "eslint --ext .js --ext .json .",
+		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
 		"docker-start": "service-runner docker-start",
 		"docker-test": "service-runner docker-test",
