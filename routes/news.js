@@ -19,8 +19,7 @@ let app;
  * Get descriptions of current events and related article links.
  * Experimental and English-only.
  */
-router.get('/news', (req, res) => {
-    return news.promise(app, req)
+router.get('/news', (req, res) => news.promise(app, req)
     .then((response) => {
         if (response.payload) {
             util.setETag(res, response.meta && response.meta.etag);
@@ -32,8 +31,7 @@ router.get('/news', (req, res) => {
         } else {
             res.status(204).end();
         }
-    });
-});
+    }));
 
 module.exports = function (appObj) {
     app = appObj;

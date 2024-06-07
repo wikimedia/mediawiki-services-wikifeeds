@@ -22,13 +22,11 @@ const router = util.router();
  * the highest relative score is returned. Requesting about 12 items
  * seems to consistently produce a really "good" result.
  */
-router.get('/random/title', (req, res) => {
-    return lib.promise(req).then((title) => {
+router.get('/random/title', (req, res) => lib.promise(req).then((title) => {
         res.status(200);
         util.setContentType(res, util.CONTENT_TYPES.random);
         res.json({ items: [ { title } ] }).end();
-    });
-});
+    }));
 
 const RANDOM_FORMATS = [
     'title',

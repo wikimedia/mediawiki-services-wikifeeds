@@ -110,7 +110,7 @@ router.get(
 			const internalRes = fragment.handler(app, reqClone).catch((err) => Object());
 			featuredProps[part] = internalRes;
 		});
-		return P.props(featuredProps).then(function (result) {
+		return P.props(featuredProps).then((result) => {
 			const body = {};
 			Object.keys(result).forEach((key) => {
 				if (result[key] && Object.keys(result[key]).length) {

@@ -21,8 +21,7 @@ let app;
  * GET {domain}/v1/page/featured/{year}/{month}/{day}
  * Gets the title for a featured article of a given date.
  */
-router.get('/featured/:yyyy/:mm/:dd', (req, res) => {
-    return featured.promise(app, req)
+router.get('/featured/:yyyy/:mm/:dd', (req, res) => featured.promise(app, req)
         .then((response) => {
             if (response.payload) {
                 util.setETag(res, response.meta && response.meta.etag);
@@ -34,8 +33,7 @@ router.get('/featured/:yyyy/:mm/:dd', (req, res) => {
             } else {
                 res.status(204).end();
             }
-        });
-});
+        }));
 
 module.exports = function (appObj) {
     app = appObj;

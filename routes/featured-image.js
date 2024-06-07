@@ -22,8 +22,7 @@ let app;
  * Gets the title and other metadata for the picture of the day of a given date.
  * ETag is set to the pageid and the revision.
  */
-router.get('/image/featured/:yyyy/:mm/:dd', (req, res) => {
-    return featured.promise(app, req)
+router.get('/image/featured/:yyyy/:mm/:dd', (req, res) => featured.promise(app, req)
         .then((response) => {
             if (response.payload) {
                 util.setETag(res, response.meta && response.meta.tid);
@@ -32,8 +31,7 @@ router.get('/image/featured/:yyyy/:mm/:dd', (req, res) => {
             } else {
                 res.status(204).end();
             }
-        });
-});
+        }));
 
 module.exports = function (appObj) {
     app = appObj;

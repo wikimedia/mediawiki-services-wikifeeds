@@ -20,8 +20,7 @@ let app;
  * available) a thumbnail and/or description for the top 40-50 most read
  * articles for the date requested.
  */
-router.get('/most-read/:yyyy/:mm/:dd', (req, res) => {
-    return mostRead.promise(app, req)
+router.get('/most-read/:yyyy/:mm/:dd', (req, res) => mostRead.promise(app, req)
     .then((response) => {
         if (response.payload) {
             util.setETag(res, response.meta && response.meta.revision);
@@ -33,8 +32,7 @@ router.get('/most-read/:yyyy/:mm/:dd', (req, res) => {
         } else {
             res.status(204).end();
         }
-    });
-});
+    }));
 
 module.exports = function (appObj) {
     app = appObj;

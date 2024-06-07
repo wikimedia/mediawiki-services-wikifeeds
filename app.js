@@ -61,9 +61,7 @@ function initApp(options) {
             'user-agent', 'x-request-id'
         ];
     }
-    app.conf.log_header_allowlist = new RegExp(`^(?:${ app.conf.log_header_allowlist.map((item) => {
-        return item.trim();
-    }).join('|') })$`, 'i');
+    app.conf.log_header_allowlist = new RegExp(`^(?:${ app.conf.log_header_allowlist.map((item) => item.trim()).join('|') })$`, 'i');
 
     // set up the request templates for the APIs
     apiUtil.setupApiTemplates(app);
@@ -142,8 +140,7 @@ function initApp(options) {
 function loadRoutes(app, dir) {
 
     // recursively load routes from .js files under routes/
-    return fs.readdirAsync(dir).map((fname) => {
-        return BBPromise.try(() => {
+    return fs.readdirAsync(dir).map((fname) => BBPromise.try(() => {
             const resolvedPath = path.resolve(dir, fname);
             const isDirectory = fs.statSync(resolvedPath).isDirectory();
             if (isDirectory) {
@@ -185,8 +182,7 @@ function loadRoutes(app, dir) {
                 next();
             });
             app.use(route.path, route.router);
-        });
-    }).then(() => {
+        })).then(() => {
         // catch errors
         sUtil.setErrorHandler(app);
         // route loading is now complete, return the app object
@@ -239,14 +235,10 @@ function createServer(app) {
  * @param {Object} options the options to initialise the app with
  * @return {bluebird} HTTP server
  */
-module.exports = (options) => {
-
-    return initApp(options)
+module.exports = (options) => initApp(options)
     .then((app) => loadRoutes(app, `${ __dirname }/routes`))
     .then((app) => {
         // serve static files from static/
         app.use('/static', express.static(`${ __dirname }/static`));
         return app;
     }).then(createServer);
-
-};
