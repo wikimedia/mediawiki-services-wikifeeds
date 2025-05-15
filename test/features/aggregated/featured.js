@@ -84,7 +84,7 @@ describe('aggregated featured', function () {
         return preq.get({
             uri: `${server.config.uri}${domain}${path}`
         }).then(function (res) {
-            assert.deepEqual(Object.keys(res.body), ["tfa", "image", "news", "onthisday"])
+            assert.deepEqual(Object.keys(res.body), ["tfa", "image", "news", "onthisday", "dyk"])
         })
     })
 

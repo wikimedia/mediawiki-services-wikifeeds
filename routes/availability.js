@@ -4,7 +4,7 @@ const util = require('../lib/util');
 const tfaDomains = require('../lib/featured').supportedDomains;
 const newsLangs = Object.keys(require('../etc/news-sites'));
 const onThisDayLangs = Object.keys(require('../lib/on-this-day.languages').languages);
-
+const didYouKnowLangs = Object.keys(require('../etc/dyk-sites'));
 const router = util.router();
 
 function langCodesToWikipediaDomains(langCodes) {
@@ -17,7 +17,8 @@ router.get('/availability', (req, res) => {
         most_read: langCodesToWikipediaDomains([ '*' ]),
         picture_of_the_day: langCodesToWikipediaDomains([ '*' ]),
         in_the_news: langCodesToWikipediaDomains(newsLangs),
-        on_this_day: langCodesToWikipediaDomains(onThisDayLangs)
+        on_this_day: langCodesToWikipediaDomains(onThisDayLangs),
+        did_you_know: langCodesToWikipediaDomains(didYouKnowLangs)
     };
     res.status(200);
     util.setETag(res, util.hashCode(JSON.stringify(response)));

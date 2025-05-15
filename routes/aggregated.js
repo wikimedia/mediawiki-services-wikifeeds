@@ -9,6 +9,7 @@ const mostRead = require('../lib/most-read');
 const featuredImage = require('../lib/featured-image');
 const news = require('../lib/news');
 const onThisDay = require('../lib/on-this-day');
+const dyk = require('../lib/did-you-know');
 const uuidv1 = require('uuid').v1;
 
 /**
@@ -90,6 +91,16 @@ const FEATURED_FEED_PARTS = {
 		renewable: true,
 		query: {
 			aggregated: false
+		}
+	},
+	dyk: {
+		handler: async (a, req) => {
+			const internalRes = await dyk.promise(a, req);
+			return internalRes.payload;
+		},
+		renewable: false,
+		query: {
+			aggregated: true
 		}
 	}
 };
