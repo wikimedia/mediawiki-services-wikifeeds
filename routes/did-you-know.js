@@ -2,6 +2,7 @@
 
 const util = require('../lib/util');
 const lib = require('../lib/did-you-know');
+const uuidv1 = require('uuid').v1;
 
 /**
  * The main router object
@@ -20,11 +21,12 @@ let app;
 router.get('/did-you-know', (req, res) => lib.promise(app, req)
     .then((response) => {
         if (response.payload) {
-            util.setETag(res, response.meta && response.meta.etag);
             if (response.meta.vary) {
                 res.header('vary', response.meta.vary.join(','));
             }
-            util.setContentType(res, util.CONTENT_TYPES.unpublished);
+            res.set('etag', uuidv1());
+            res.set('cache-control', 's-maxage=300, max-age=60');
+            util.setContentType(res, util.CONTENT_TYPES.dyk);
             res.status(200).json(response.payload);
         } else {
             res.status(204).end();
