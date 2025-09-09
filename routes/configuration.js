@@ -1,7 +1,7 @@
 'use strict';
 
 const util = require('../lib/util');
-const configuration = require('../lib/configuration');
+const configuration = require('../lib/configuration/configuration');
 
 /**
  * The main router object
