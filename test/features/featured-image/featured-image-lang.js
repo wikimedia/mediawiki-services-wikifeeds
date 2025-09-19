@@ -1,6 +1,6 @@
 'use strict';
 
-const preq = require('preq');
+const testUtil = require('../../utils/testUtil.js');
 const domino = require('domino');
 const assert = require('../../utils/assert.js');
 const server = require('../../utils/server.js');
@@ -22,11 +22,12 @@ describe('featured-image-lang', function () {
     }
 
     function testDomain(uri, lang) {
-        return preq.get(uri)
+        return testUtil.preqWithUserAgent(uri)
             .then((resFeaturedImage) => {
                 if (resFeaturedImage.status === 200) {
                     if (resFeaturedImage.body.file_page !== '') {
-                        return preq.get(resFeaturedImage.body.file_page).then((res) => {
+                        return testUtil.preqWithUserAgent(resFeaturedImage.body.file_page)
+                        .then((res) => {
                             if (res.status === 200) {
                                 const doc = domino.createDocument(res.body);
                                 const descriptions = {};

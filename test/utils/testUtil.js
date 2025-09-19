@@ -1,5 +1,6 @@
 'use strict';
 
+const preq = require('preq');
 const dateUtil = require('../../lib/date-util');
 const Template = require('swagger-router').Template;
 
@@ -28,5 +29,14 @@ testUtil.rbTemplate = new Template({
     headers: '{{request.headers}}',
     body: '{{request.body}}'
 });
+
+testUtil.preqWithUserAgent = function(uri) {
+    return preq.get({
+        uri: uri,
+        headers: {
+            'User-Agent': 'WikiFeeds/1.0 (https://www.mediawiki.org/wiki/Wikifeeds)'
+        }
+    });
+};
 
 module.exports = testUtil;
