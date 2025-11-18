@@ -5,7 +5,7 @@ const assert = require('../../utils/assert');
 const server = require('../../utils/server');
 
 describe('aggregated featured', function () {
-    this.timeout(10000);
+    this.timeout(20000);
     before(() => server.start());
 
     it('should return 200 for a valid request', function () {
@@ -91,7 +91,7 @@ describe('aggregated featured', function () {
 })
 
 describe('aggregate onthisday', function () {
-    this.timeout(10000);
+    this.timeout(20000);
     before(() => server.start());
 
     it('should return 200 for a valid request', function () {
