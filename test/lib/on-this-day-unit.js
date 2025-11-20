@@ -258,17 +258,10 @@ describe('onthisday-unit', () => {
                             title: "馬庫斯·特倫提烏斯·瓦羅"
                         },
                         {
-                            title: '羅馬建城紀年'
-                        },
-                        {
                             title: '羅慕路斯與雷穆斯'
                         },
                         {
                             title: '帕拉蒂尼山'
-                        },
-                        {
-                            isTopic: true,
-                            title: '羅馬的建立'
                         }
                     ],
                     year: -753
@@ -630,7 +623,7 @@ describe('onthisday-unit', () => {
         });
     });
 
-    describe('external urls should be excluded', () => {
+    describe('non-article urls should be excluded', () => {
         it('exclude external url from WMFHoliday pages', () => {
             const LI = domino.createDocument(`
                 <ul>
@@ -656,6 +649,22 @@ describe('onthisday-unit', () => {
                     <a href="http://someexternallink" title="Some external link">
                       some external link
                     </a>
+                    <a href="./Dog" title="Dog">
+                      Dog
+                    </a>
+                  </li>
+                </ul>
+              `).querySelector('#thisLI');
+            const event = onThisDay.wmfEventFromListElement(LI, false, 'en');
+            assert.deepEqual(event.pages.length, 1);
+            assert.deepEqual(event.pages[0].title, 'Dog');
+        });
+        it('exclude redlinks from WMFEvent pages', () => {
+            const LI = domino.createDocument(`
+                <ul>
+                  <li id='thisLI'>
+                    1999 -
+                    <a href="./NonExistentArticle?action=edit&amp;redlink=1" title="NonExistentArticle" class="new">Non-existent article</a>
                     <a href="./Dog" title="Dog">
                       Dog
                     </a>
