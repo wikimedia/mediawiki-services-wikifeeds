@@ -138,12 +138,6 @@ router.get(
 			res.set('cache-control', 's-maxage=300, max-age=60');
 			res.set('content-type', contentType);
 			res.json(body);
-
-			// Instrumentation for T339127
-			if (!('mostread' in body) || !body.mostread || !body.mostread.articles) {
-				const msg = 'Most read entry is empty';
-				req.app.logger.log('warn', { msg, url: req.originalUrl });
-			}
 		});
 	}
 );
