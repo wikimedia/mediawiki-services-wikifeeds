@@ -69,12 +69,15 @@ describe('onthisday', function() {
         });
     });
 
-    it('filters out duplicate articles from pages', () => {
+    it('verify contents in events', () => {
         return getJanuary30ResponseForEndpointName('all')
         .then((response) => {
             ['births', 'deaths', 'events', 'holidays', 'selected'].forEach((type) => {
                 response.body[type].forEach((event) => {
-                    assert.deepEqual([], testUtil.findDuplicateTitles(event.pages));
+                    assert.deepEqual([], testUtil.findDuplicateTitles(event.pages), 'duplicate articles in pages');
+                    event.pages.forEach((page) => {
+                        assert.ok(page.title != 'January_30', 'Date page should be filtered out from event');
+                    });
                 });
             });
         });
