@@ -36,7 +36,7 @@ describe('most-read articles', function() {
     });
 
     it('Should filter out missing summaries', () => {
-        const uri = `${server.config.uri}da.wikipedia.org/v1/page/most-read/2020/09/22`;
+        const uri = `${server.config.uri}da.wikipedia.org/v1/page/most-read/2025/09/22`;
         return preq.get({ uri })
         .then((res) => res.body.articles.forEach((article) => assert.isSummary(article)));
     });

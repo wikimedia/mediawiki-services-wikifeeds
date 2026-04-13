@@ -337,10 +337,10 @@ paths:
           schema:
             $ref: "#/definitions/problem"
       x-amples:
-        - title: retrieve title of the featured article for April 29, 2016
+        - title: retrieve title of the featured article for April 29, 2025
           request:
             params:
-              year: 2016
+              year: 2025
               month: "04"
               day: 29
           response:
@@ -361,7 +361,7 @@ paths:
           request:
             params:
               domain: is.wikipedia.org
-              year: 2016
+              year: 2025
               month: "04"
               day: 29
             query:
@@ -405,10 +405,10 @@ paths:
           schema:
             $ref: "#/definitions/problem"
       x-amples:
-        - title: retrieve featured image data for April 29, 2016
+        - title: retrieve featured image data for April 29, 2025
           request:
             params:
-              year: 2016
+              year: 2025
               month: "04"
               day: 29
           response:
@@ -487,10 +487,10 @@ paths:
           schema:
             $ref: "#/definitions/problem"
       x-amples:
-        - title: retrieve the most-read articles for January 1, 2016
+        - title: retrieve the most-read articles for January 1, 2026
           request:
             params:
-              year: 2016
+              year: 2026
               month: "01"
               day: "01"
           response:
@@ -505,16 +505,16 @@ paths:
               x-content-security-policy: default-src
               x-frame-options: SAMEORIGIN
             body:
-              date: 2016-01-01Z
+              date: 2026-01-01Z
               articles:
                 - views: /.+/
                   rank: /.+/
                   title: /.+/
                   extract: /.+/
-        - title: retrieve the most-read articles for January 1, 2016 (with aggregated=true)
+        - title: retrieve the most-read articles for January 1, 2026 (with aggregated=true)
           request:
             params:
-              year: 2016
+              year: 2026
               month: "01"
               day: "01"
             query:
@@ -531,7 +531,7 @@ paths:
               x-content-security-policy: default-src
               x-frame-options: SAMEORIGIN
             body:
-              date: 2015-12-31Z
+              date: 2025-12-31Z
               articles:
                 - views: /.+/
                   rank: /.+/
@@ -754,10 +754,10 @@ paths:
           schema:
             $ref: "#/definitions/problem"
       x-amples:
-        - title: retrieve aggregated featured content for April 29, 2016
+        - title: retrieve aggregated featured content for April 29, 2025
           request:
             params:
-              year: 2016
+              year: 2025
               month: "04"
               day: 29
           response:
