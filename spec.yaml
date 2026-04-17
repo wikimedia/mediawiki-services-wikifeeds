@@ -50,24 +50,23 @@ parameters:
     in: path
     name: month
     required: true
-    type: integer
+    type: string
     description: Two-digit month, 0-padded if necessary (01-12)
-    minimum: 01
-    maximum: 12
+    pattern: "^(0[1-9]|1[012])$"
   day:
     in: path
     name: day
     required: true
-    type: integer
+    type: string
     description: Two-digit day of the month, 0-padded if necessary (01-31)
-    minimum: 01
-    maximum: 31
+    pattern: "^(0[1-9]|[12][0-9]|3[01])$"
 
 paths:
   # from routes/root.js
   /robots.txt:
     get:
       summary: Get robots.txt
+      operationId: getRobotsTxt
       tags:
         - Internal
       description: Returns the robots.txt file.
@@ -83,6 +82,7 @@ paths:
   /:
     get:
       summary: Root endpoint
+      operationId: rootEndpoint
       tags:
         - Internal
       description: The root service end-point
@@ -108,6 +108,7 @@ paths:
   /_info:
     get:
       summary: Get service information
+      operationId: getServiceInformation
       tags:
         - Internal
       description: Returns information about the service.
@@ -140,6 +141,7 @@ paths:
       tags:
         - Feed
       summary: Get supported projects
+      operationId: getSupportedProjects
       description: Returns availability of featured feed content by Wikimedia project domain.
       produces:
         - application/json
@@ -185,6 +187,7 @@ paths:
       tags:
         - Internal
       summary: Get app announcements
+      operationId: getAppAnnouncements
       description: |
         Returns announcements for display in the official Wikipedia mobile apps.
         This is usually used to show announcements for surveys or fundraising.
@@ -223,6 +226,7 @@ paths:
       tags:
         - Feed
       summary: Get events on a day in history
+      operationId: getEventsOnADayInHistory
       description: |
         Returns events that occurred on a day in history, including notable historical
         events, holidays, and births and deaths of notable people.
@@ -301,6 +305,7 @@ paths:
       tags:
         - Internal
       summary: Get featured article of the day
+      operationId: getFeaturedArticleOfTheDay
       description: |
         Returns the page title of "Today's featured article" (only works on select wikis).
       produces:
@@ -376,6 +381,7 @@ paths:
       tags:
         - Internal
       summary: Get picture of the day
+      operationId: getPictureOfTheDay
       description: |
         Returns the daily featured image from Wikimedia Commons, including thumbnail and
         full resolution image URLs and a localized description based on the domain.
@@ -457,6 +463,7 @@ paths:
       tags:
         - Internal
       summary: Get most-viewed pages
+      operationId: getMostViewedPages
       description: |
         Returns the most-read articles for the date provided.
         The date is in UTC, as other endpoints, too.
@@ -555,6 +562,7 @@ paths:
       tags:
         - Internal
       summary: Get current news headlines
+      operationId: getCurrentNewsHeadlines
       description: |
         Returns content related to the current "In the News" template
         (for some wikis).
@@ -614,6 +622,7 @@ paths:
       tags:
         - Page
       summary: Get a random article
+      operationId: getARandomArticle
       description: |
         Returns the title of a randomly picked article from the main namespace.
         Preference is given to articles with a thumbnail and an associated Wikidata description.
@@ -655,6 +664,7 @@ paths:
       tags:
         - Internal
       summary: Get feed configuration
+      operationId: getFeedConfiguration
       description: |
         Returns information for use in official Wikipedia mobile apps.
       produces:
@@ -686,6 +696,7 @@ paths:
       tags:
         - Feed
       summary: Get featured facts
+      operationId: getFeaturedFacts
       description: |
         Returns a series of facts from new or recently improved articles on Wikipedia.
         Featured facts are updated on a regular basis according to the policies
@@ -722,6 +733,7 @@ paths:
       tags:
         - Feed
       summary: Get featured content
+      operationId: getFeaturedContent
       description: |
         Returns featured content from Wikipedia for a given day. Depending on availability,
         the response can include the daily featured article (TFA), featured image or media file,
