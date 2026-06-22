@@ -39,6 +39,18 @@ describe('news-unit', () => {
         assert.deepEqual(story, testStoryObj);
     });
 
+    it('"(pictured)" parenthetical is stripped from the story', () => {
+        const html = domino.createDocument(fixtures.newsHtmlWithPictured)
+            .getElementsByTagName('li')[0];
+        const story = news.constructStory({
+            headers: {},
+            params: {
+                domain: 'en.wikipedia.org'
+            }
+        }, 'en', html);
+        assert.ok(!(/pictured/i).test(story.story), 'story should not contain "pictured"');
+    });
+
     it('floating spans are removed', () => {
         const html = domino.createDocument(fixtures.newsHtmlWithFloatingSpan)
             .getElementsByTagName('li')[0];
