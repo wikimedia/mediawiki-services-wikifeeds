@@ -60,9 +60,9 @@ describe('express app', function() {
         });
     });
 
-    it('should get static content gzipped', () => {
+    it('should get spec content gzipped', () => {
         return preq.get({
-            uri: `${server.config.uri}static/index.html`,
+            uri: `${server.config.uri}?spec`,
             headers: {
                 'accept-encoding': 'gzip, deflate'
             }
@@ -74,9 +74,9 @@ describe('express app', function() {
         });
     });
 
-    it('should get static content uncompressed', () => {
+    it('should get spec content uncompressed', () => {
         return preq.get({
-            uri: `${server.config.uri}static/index.html`,
+            uri: `${server.config.uri}?spec`,
             headers: {
                 'accept-encoding': ''
             }
