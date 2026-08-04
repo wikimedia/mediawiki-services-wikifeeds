@@ -33,7 +33,6 @@ function initApp(options) {
     // ensure some sane defaults
     app.conf.port = app.conf.port || 8888;
     app.conf.interface = app.conf.interface || '0.0.0.0';
-    // eslint-disable-next-line max-len
     app.conf.compression_level = app.conf.compression_level === undefined ? 3 : app.conf.compression_level;
     app.conf.cors = app.conf.cors === undefined ? '*' : app.conf.cors;
     if (app.conf.csp === undefined) {
