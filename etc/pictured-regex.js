@@ -6,7 +6,7 @@
  * image associated with the snippet; since we display only the text of the
  * snippet (Did You Know, In The News) and not the image, we strip them away.
  *
- * @type {{Object.<string, RegExp>}} Map of Wikipedia language codes to regexes
+ * @type {Object.<string, RegExp>} Map of Wikipedia language codes to regexes
  */
 module.exports = {
     ar: /\s*\(في الصورة\)/i,

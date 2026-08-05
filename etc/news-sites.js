@@ -2,8 +2,8 @@
 'use strict';
 
 /**
- * @private {!string} _title
- * @private {!string} _headlineSelector
+ * @property {!string} _title
+ * @property {!string} _headlineSelector
  */
 class NewsSite {
     /**
@@ -47,7 +47,7 @@ const TOPIC_SELECTOR_LINK = 'a[rel="mw:WikiLink"]:nth-of-type(1)';
 const TOPIC_SELECTOR_BOLD_LINK = 'b:nth-of-type(1) a[rel="mw:WikiLink"]';
 
 /**
- * @type {{Object.<string, NewsSite>}} A map of Wikipedia site languages codes to NewsSites
+ * @type {Object.<string, NewsSite>} A map of Wikipedia site languages codes to NewsSites
  */
 module.exports = {
     test: new NewsSite('InTheNewsFormatExample', STORY_SELECTOR, TOPIC_SELECTOR_BOLD_LINK),

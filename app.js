@@ -17,7 +17,7 @@ const path = require('path');
  * Creates an express app and initialises it
  *
  * @param {Object} options the options to initialise the app with
- * @return {bluebird} the promise resolving to the app object
+ * @return {Promise} the bluebird promise resolving to the app object
  */
 function initApp(options) {
 
@@ -134,7 +134,7 @@ function initApp(options) {
  *
  * @param {Application} app the application object to load routes into
  * @param {string} dir routes folder
- * @return {bluebird} a promise resolving to the app object
+ * @return {Promise} a bluebird promise resolving to the app object
  */
 function loadRoutes(app, dir) {
 
@@ -194,7 +194,7 @@ function loadRoutes(app, dir) {
  * Creates and start the service's web server
  *
  * @param {Application} app the app object to use in the service
- * @return {bluebird} a promise creating the web server
+ * @return {Promise} a bluebird promise creating the web server
  */
 function createServer(app) {
 
@@ -232,7 +232,7 @@ function createServer(app) {
  * object to it.
  *
  * @param {Object} options the options to initialise the app with
- * @return {bluebird} HTTP server
+ * @return {Promise} a bluebird promise resolving to the HTTP server
  */
 module.exports = (options) => initApp(options)
     .then((app) => loadRoutes(app, `${ __dirname }/routes`))

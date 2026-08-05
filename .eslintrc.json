@@ -34,13 +34,22 @@
 		"no-shadow": "off",
 		"strict": "off",
 		"semi-style": "off",
-		"jsdoc/check-access": "off",
-		"jsdoc/no-undefined-types": "off",
-		"jsdoc/require-param-type": "off",
-		"jsdoc/require-returns-check": "off",
-		"jsdoc/valid-types": "off",
 		"security/detect-non-literal-regexp": "off",
 		"security/detect-non-literal-require": "off",
 		"security/detect-unsafe-regex": "off"
+	},
+	"settings": {
+		"jsdoc": {
+			"preferredTypes": {
+				"Agent": "Agent",
+				"AnchorElement": "AnchorElement",
+				"Application": "Application",
+				"Document": "Document",
+				"Granularity": "Granularity",
+				"ListElement": "ListElement",
+				"Platform": "Platform",
+				"Router": "Router"
+			}
+		}
 	}
 }
