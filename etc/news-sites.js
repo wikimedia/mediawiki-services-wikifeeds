@@ -62,7 +62,7 @@ module.exports = {
     he: new NewsSite('תבנית:חדשות_ואקטואליה', 'section > ul > li', TOPIC_SELECTOR_LINK),
     ko: new NewsSite('틀:새로_들어온_소식', 'body > section > ul > li', TOPIC_SELECTOR_BOLD_LINK),
     no: new NewsSite('Mal:Aktuelt', 'ul > li', TOPIC_SELECTOR_BOLD_LINK),
-    pl: new NewsSite('Szablon:Aktualności', 'ul:last-of-type > li', TOPIC_SELECTOR_BOLD_LINK),
+    pl: new NewsSite('Szablon:Aktualności', '.wikifeeds-feed-news ul > li', TOPIC_SELECTOR_BOLD_LINK),
     pt: new NewsSite('Portal:Eventos_atuais', 'table:nth-of-type(2) div:not(.hlist) > ul > li', TOPIC_SELECTOR_BOLD_LINK),
     ru: new NewsSite('Шаблон:Текущие_события_на_заглавной_странице', 'body > section > ul > li', TOPIC_SELECTOR_BOLD_LINK),
     sco: new NewsSite('Template:In_the_news', 'section > ul > li', TOPIC_SELECTOR_BOLD_LINK), // see en
